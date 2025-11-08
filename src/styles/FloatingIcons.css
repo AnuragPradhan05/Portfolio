@@ -1,0 +1,48 @@
+.floating-icons {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-icons .icon {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.15;
+  animation: floatGlow 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.5));
+}
+
+/* Random positions for desktop */
+.icon.react { top: 15%; left: 15%; color: #61dafb; }
+.icon.html { top: 20%; right: 20%; color: #ff4500; }
+.icon.css { bottom: 25%; left: 10%; color: #007bff; }
+.icon.js { bottom: 15%; right: 25%; color: #f7df1e; }
+.icon.node { top: 40%; right: 10%; color: #68a063; }
+.icon.github { bottom: 10%; left: 40%; color: #fff; }
+
+@keyframes floatGlow {
+  0%, 100% { transform: translateY(0); opacity: 0.12; }
+  50% { transform: translateY(-15px); opacity: 0.25; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .floating-icons .icon { font-size: 2rem; opacity: 0.12; }
+}
+
+@media (max-width: 768px) {
+  .floating-icons .icon { font-size: 1.6rem; opacity: 0.1; animation-duration: 7s; }
+  .icon.react { top: 15%; left: 10%; }
+  .icon.html { top: 15%; right: 10%; }
+  .icon.css { bottom: 20%; left: 5%; }
+  .icon.js { bottom: 10%; right: 15%; }
+  .icon.node { top: 35%; right: 5%; }
+  .icon.github { bottom: 5%; left: 35%; }
+}
+
+@media (max-width: 480px) {
+  .floating-icons .icon { font-size: 1.2rem; opacity: 0.08; animation-duration: 8s; }
+  .icon.github, .icon.node { display: none; }
+}
