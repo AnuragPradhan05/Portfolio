@@ -35,7 +35,7 @@
   flex-wrap: wrap;
   gap: 3rem;
   animation: slideUp 1s ease forwards;
-  padding-top: 120px; /* adjust based on your navbar height */
+  /* padding-top: 120px; adjust based on your navbar height */
 
 }
 
@@ -185,6 +185,7 @@
     flex-direction: column;
     text-align: center;
     gap: 2rem;
+    padding-top: 120px;
   }
 
   .home-image img {
