@@ -6,6 +6,8 @@ import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
+      <Footer />      
     </>
   )
 }
