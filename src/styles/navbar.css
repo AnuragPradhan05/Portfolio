@@ -267,3 +267,9 @@
 .nav-item:hover .nav-icon {
   filter: drop-shadow(0 0 6px #ff8c00) drop-shadow(0 0 10px #ff6600);
 }
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 80px;
+  }
+}

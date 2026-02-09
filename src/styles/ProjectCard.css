@@ -1,0 +1,88 @@
+/* ================= Card ================= */
+.project-card {
+  background: rgba(15, 15, 15, 0.6);
+  border: 1px solid rgba(255, 140, 0, 0.15);
+  padding: 20px;
+  border-radius: 14px;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+  
+
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Simple hover */
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 140, 0, 0.35);
+  }
+}
+
+
+/* ================= Title ================= */
+.project-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #f5f5f5;
+  font-weight: 500;
+}
+
+
+/* ================= Description ================= */
+.project-card p {
+  font-size: 0.95rem;
+  color: #c7c6c5;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+
+/* ================= Tech Stack ================= */
+.tech-stack {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-stack span {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 140, 0, 0.08);
+  color: #ffb266;
+  border: 1px solid rgba(255, 140, 0, 0.18);
+}
+
+
+/* ================= Mobile ================= */
+@media (max-width: 600px) {
+  .project-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .project-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* ================= Accessibility ================= */
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transition: none;
+  }
+  .project-card:hover {
+    transform: none;
+  }
+}
