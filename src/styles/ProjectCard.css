@@ -1,46 +1,73 @@
-/* ================= Card ================= */
+/* ================= Card Wrapper ================= */
 .project-card {
+  perspective: 1000px;
+  height: 260px;
+}
+
+/* ================= Inner Flip ================= */
+.project-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.project-card.flipped .project-inner {
+  transform: rotateY(180deg);
+}
+
+/* ================= Front + Back ================= */
+.project-front,
+.project-back {
+  position: absolute;
+  inset: 0;
+
   background: rgba(15, 15, 15, 0.6);
   border: 1px solid rgba(255, 140, 0, 0.15);
-  padding: 20px;
   border-radius: 14px;
-  cursor: pointer;
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80%;
-  
 
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  backface-visibility: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-/* Simple hover */
+/* Back rotated */
+.project-back {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* Hover lift (only desktop) */
 @media (hover: hover) and (pointer: fine) {
-  .project-card:hover {
+  .project-front:hover {
     transform: translateY(-4px);
     border-color: rgba(255, 140, 0, 0.35);
   }
 }
 
-
 /* ================= Title ================= */
-.project-card h3 {
+.project-front h3,
+.project-back h3 {
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: #f5f5f5;
   font-weight: 500;
 }
 
-
 /* ================= Description ================= */
-.project-card p {
+.project-front p {
   font-size: 0.95rem;
   color: #c7c6c5;
   line-height: 1.5;
   margin-bottom: 10px;
 }
-
 
 /* ================= Tech Stack ================= */
 .tech-stack {
@@ -48,6 +75,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  justify-content: center;
 }
 
 .tech-stack span {
@@ -59,30 +87,210 @@
   border: 1px solid rgba(255, 140, 0, 0.18);
 }
 
+/* ================= Flip Button ================= */
+.flip-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+
+  background: rgba(255, 140, 0, 0.15);
+  border: none;
+  color: #ffb266;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.flip-btn:hover {
+  background: #ff6a00;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* ================= Links (Back Side) ================= */
+.project-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #ffb266;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 140, 0, 0.25);
+  background: rgba(255, 140, 0, 0.08);
+
+  transition: 0.2s ease;
+}
+
+.project-link:hover {
+  background: #ff6a00;
+  color: white;
+  transform: translateY(-2px);
+}
 
 /* ================= Mobile ================= */
 @media (max-width: 600px) {
   .project-card {
+    height: 240px;
+  }
+
+  .project-front,
+  .project-back {
     padding: 16px;
     border-radius: 12px;
   }
 
-  .project-card h3 {
+  .project-front h3,
+  .project-back h3 {
     font-size: 1.1rem;
   }
 
-  .project-card p {
+  .project-front p {
     font-size: 0.9rem;
   }
 }
 
-
 /* ================= Accessibility ================= */
 @media (prefers-reduced-motion: reduce) {
-  .project-card {
+  .project-inner {
     transition: none;
   }
-  .project-card:hover {
-    transform: none;
+}
+
+
+/* ================= Demo Button ================= */
+.demo-btn {
+  background: linear-gradient(90deg, #ff8c00, #ff6a00);
+  border: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.2s;
+}
+
+.demo-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+
+/* ================= Modal ================= */
+.demo-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+/* Popup Box */
+.demo-box {
+  position: relative;
+  background: #0b0b0b;
+  padding: clamp(14px, 3vw, 20px);
+  border-radius: 12px;
+  width: min(92%, 360px);
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 0 25px rgba(0,0,0,0.65);
+  text-align: left;
+}
+
+/* Title */
+.demo-box h3 {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #ffb266;
+}
+
+/* Close Button */
+.demo-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: rgba(0,0,0,0.65);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.demo-close:hover {
+  background: #ff6a00;
+  transform: scale(1.08);
+}
+
+/* Credentials */
+.demo-cred {
+  margin-bottom: 12px;
+  font-size: clamp(0.82rem, 2.2vw, 0.9rem);
+}
+
+.demo-cred b {
+  color: #ffb266;
+}
+
+.demo-cred p {
+  margin: 2px 0;
+  color: #cfcfcf;
+  word-break: break-word;
+}
+
+
+/* ================= Mobile Optimization ================= */
+@media (max-width: 480px) {
+  .demo-modal {
+    align-items: flex-end;   /* slide from bottom feel */
+  }
+
+  .demo-box {
+    width: 100%;
+    border-radius: 14px 14px 0 0;
+    max-height: 75vh;
+    padding: 16px;
+  }
+
+  .demo-close {
+    width: 30px;
+    height: 30px;
+  }
+
+  .demo-cred {
+    font-size: 0.88rem;
+  }
+}
+
+
+/* ================= Small Mobile ================= */
+@media (max-width: 360px) {
+  .demo-box {
+    padding: 14px;
+  }
+
+  .demo-cred {
+    font-size: 0.85rem;
   }
 }

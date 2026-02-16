@@ -25,7 +25,7 @@ const Footer = () => {
         transition={{ duration: 0.8 }}
       >
         <motion.a
-          href="mailto:pradhananurag2005.com"
+          href="mailto:pradhananurag2005@gmail.com"
           whileHover={{ scale: 1.3, rotate: 10 }}
           className="footer-icon"
           title="Mail me"

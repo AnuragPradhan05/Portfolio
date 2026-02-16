@@ -1,79 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars, FaTimes, FaHome, FaUser, FaCode, FaEnvelope } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaHome, FaUser, FaCode, FaEnvelope } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import "/src/styles/navbar.css";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
+  const wrapperRef = useRef();
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
-
+  // Close when clicking outside
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleClickOutside = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const navItems = [
+    { path: "/", icon: <FaHome />, label: "Home" },
+    { path: "/about", icon: <FaUser />, label: "About" },
+    { path: "/projects", icon: <FaCode />, label: "Projects" },
+    { path: "/contact", icon: <FaEnvelope />, label: "Contact" },
+  ];
+
   return (
-    <motion.nav
-      className="navbar"
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      <div className="navbar-container">
-        {/* Animated Logo */}
-        <motion.h2
-          className={`logo ${isMobile ? "mobile" : ""}`}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <span className="full-name">Anurag Pradhan</span>
-          <span className="short-name">AP</span>
-        </motion.h2>
+    <div className="floating-nav-wrapper" ref={wrapperRef}>
+      
+      {/* AP Floating Tab */}
+      <motion.div
+        className="ap-tab"
+        onClick={() => setOpen(!open)}
+        whileTap={{ scale: 0.9 }}
+        animate={{ scale: open ? 1.05 : 1 }}
+      >
+        AP
+      </motion.div>
 
-        {/* Menu Icon */}
-        <motion.div
-          className="menu-icon"
-          onClick={toggleMenu}
-          whileTap={{ scale: 0.9 }}
-        >
-          {menuOpen ? (
-            <FaTimes className="icon active" />
-          ) : (
-            <FaBars className="icon" />
-          )}
-        </motion.div>
-
-        {/* Nav Links */}
-        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-          {[
-            { path: "/", icon: <FaHome />, label: "Home" },
-            { path: "/about", icon: <FaUser />, label: "About" },
-            { path: "/projects", icon: <FaCode />, label: "Projects" },
-            { path: "/contact", icon: <FaEnvelope />, label: "Contact" },
-          ].map((item, index) => (
-            <motion.li
-              key={item.path}
-              className={location.pathname === item.path ? "active" : ""}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + index * 0.1 }}
-            >
-              <Link to={item.path} onClick={closeMenu} className="nav-item">
+      {/* Expanding Floating Panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="floating-nav-panel"
+            initial={{ opacity: 0, scale: 0.8, x: -20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: -20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setOpen(false)}
+                className={`floating-nav-item ${
+                  location.pathname === item.path ? "active" : ""
+                }`}
+              >
                 {item.icon}
-                <span className="nav-label">{item.label}</span>
+                <span>{item.label}</span>
               </Link>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-    </motion.nav>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

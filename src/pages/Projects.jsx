@@ -16,22 +16,38 @@ const Projects = () => {
     {
       title: "SmartBiz App",
       desc: "A modern business management platform with role-based dashboards.",
-      tech: ["React", "Node.js"],
+      tech: ["Angular", "TypeScript"],
+      github: "https://github.com/AnuragPradhan05/smartbiz",
+      live: "https://smartbiz-zhej.onrender.com/",
     },
     {
       title: "JR Transport",
       desc: "Driver & Transport Management System with clean UI.",
       tech: ["Angular", "Spring Boot"],
+      github: [
+        {
+          name: "Frontend (Angular)",
+          url: "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular",
+        },
+        {
+          name: "Backend (Spring Boot)",
+          url: "https://github.com/Motuitionapplication/JrTransportManagement-BackEnd-Spring",
+        },
+      ],
     },
     {
       title: "Snake Game",
       desc: "Classic snake game built using Python pygame.",
       tech: ["Python"],
+      github: "https://github.com/AnuragPradhan05/Snake_game",
+      live: "",
     },
     {
       title: "Python Mini Projects",
       desc: "KBC, Tic Tac Toe, Rock Paper Scissor, Book Store, etc.",
       tech: ["Python"],
+      github: "https://github.com/AnuragPradhan05/python_projects/tree/main/projects",
+      live: "",
     },
   ];
 
@@ -72,6 +88,8 @@ const Projects = () => {
               title={p.title}
               description={p.desc}
               tech={p.tech}
+              github={p.github}
+              live={p.live}
             />
           </motion.div>
         ))}

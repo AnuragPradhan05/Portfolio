@@ -16,7 +16,7 @@
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 600;
   margin-bottom: clamp(35px, 5vw, 60px);
-  margin-top: 4%;
+  margin-top: 8%;
 
   background: linear-gradient(90deg, #ffb266, #ff8c00, #ff6a00);
   -webkit-background-clip: text;
