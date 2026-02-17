@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa"; // ✅ Added icons
+import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";   // ✅ Added
 import FloatingIcons from "/src/components/FloatingIcons";
 import "/src/styles/Home.css";
 import myPic from "/src/assets/pic2.jpg";
-import resume from "/src/assets/Anurag_Pradhan_Resume_pdf.pdf"
+import resume from "/src/assets/Anurag_Pradhan_Resume_pdf.pdf";
 
 const Home = () => {
   return (
@@ -106,7 +107,6 @@ const Home = () => {
             </motion.a>
           </motion.div>
 
-
           {/* ---------- Buttons ---------- */}
           <motion.div
             className="home-buttons"
@@ -114,29 +114,33 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.9 }}
           >
-            <motion.a
-              href="/projects"
-              className="btn"
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0 0 25px rgba(255,140,0,0.9)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View My Work
-            </motion.a>
+            {/* ✅ Changed from <a> to <Link> */}
+            <Link to="/projects" className="btn">
+              <motion.span
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 0 25px rgba(255,140,0,0.9)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                style={{ display: "inline-block" }}
+              >
+                View My Work
+              </motion.span>
+            </Link>
 
-            <motion.a
-              href="/contact"
-              className="btn-outline"
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0 0 25px rgba(255,140,0,0.7)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Me
-            </motion.a>
+            {/* ✅ Changed from <a> to <Link> */}
+            <Link to="/contact" className="btn-outline">
+              <motion.span
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 0 25px rgba(255,140,0,0.7)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                style={{ display: "inline-block" }}
+              >
+                Contact Me
+              </motion.span>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
