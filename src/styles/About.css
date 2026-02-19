@@ -1,8 +1,6 @@
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap');
 
-
-
 .about {
   position: relative;
   min-height: 100vh;
@@ -26,17 +24,14 @@
   width: 100%;
   position: relative;
   z-index: 2;
-  /* padding-top: 90px; adjust based on your navbar height */
-
 }
 
 /* ---------- Text Section ---------- */
 .about-content {
   flex: 1;
-  font-family: 'Poppins', sans-serif;
 }
 
-/* Gradient "About Me" heading */
+/* Gradient Heading */
 .about-content h1 span {
   font-family: 'Playfair Display', serif;    
   font-size: 3.8rem;
@@ -52,56 +47,13 @@
   animation: glowText 4s ease-in-out infinite alternate;
 }
 
-/* Subtle glowing animation for heading */
+/* Glow animation */
 @keyframes glowText {
   0% { text-shadow: 0 0 10px rgba(255,140,0,0.4), 0 0 20px rgba(255,140,0,0.2); }
   100% { text-shadow: 0 0 25px rgba(255,140,0,0.8), 0 0 45px rgba(255,165,0,0.6); }
 }
 
-.about-content p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin: 1.2rem 0;
-  color: #bebdbd;
-  max-width: 550px;
-  letter-spacing: 0.3px;
-  font-weight: 400;
-  transition: color 0.3s ease;
-}
-
-/* Add subtle fade animation */
-.about-content p:hover {
-  color: #ffffff;
-  transition: color 0.4s ease;
-}
-
-
-/* ---------- Image Section ---------- */
-.about-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-.about-image img {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 140, 0, 0.7);
-  box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
-  transition: all 0.5s ease;
-  filter: brightness(0.95);
-}
-
-/* Hover: smooth move + glow */
-.about-image img:hover {
-  box-shadow: 0 0 40px rgba(255, 140, 0, 0.9);
-  filter: brightness(1.1);
-}
-
-/* ---------- Decorative underline below text ---------- */
+/* Decorative underline */
 .about-content h1::after {
   content: "";
   display: block;
@@ -112,12 +64,110 @@
   border-radius: 2px;
 }
 
+/* Paragraphs */
+.about-content p {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 1.1rem 0;
+  color: #bebdbd;
+  max-width: 560px;
+  letter-spacing: 0.3px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.about-content p:hover {
+  color: #ffffff;
+}
+
+/* ---------- Bullet Points ---------- */
+.about-points {
+  margin-top: 14px;
+  padding-left: 0;
+  color: #ddd;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.about-points li {
+  margin-bottom: 8px;
+  list-style: none;
+  position: relative;
+  padding-left: 18px;
+}
+
+/* subtle glowing bullet */
+.about-points li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ff8c00;
+  font-size: 1.3rem;
+  text-shadow: 0 0 8px rgba(255,140,0,0.6);
+}
+
+/* ---------- Tech Stack Badges ---------- */
+.tech-stack {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-stack span {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.tech-stack span:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 140, 0, 0.7);
+}
+
+/* ---------- Goal Text ---------- */
+.about-goal {
+  margin-top: 16px;
+  font-weight: 500;
+  color: #f2f2f2;
+}
+
+/* ---------- Image Section ---------- */
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.about-image img {
+  width: 260px;
+  height: 380px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 140, 0, 0.7);
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
+  transition: all 0.5s ease;
+  filter: brightness(0.95);
+}
+
+.about-image img:hover {
+  box-shadow: 0 0 45px rgba(255, 140, 0, 0.95);
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .about-container {
     flex-direction: column-reverse;
     text-align: center;
-    padding-top: 90px;
   }
 
   .about-content h1 span {
@@ -133,14 +183,13 @@
     margin: 0.8rem auto;
   }
 
+  .tech-stack {
+    justify-content: center;
+  }
+
   .about-image img {
     width: 250px;
     height: 250px;
-    transform: none;
-  }
-
-  .about-image img:hover {
-    transform: scale(1.05);
   }
 }
 

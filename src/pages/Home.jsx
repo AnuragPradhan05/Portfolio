@@ -60,7 +60,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            Web Developer | Designer | Dream Builder
+            Developer | Designer | Innovator
           </motion.h3>
 
           <motion.p

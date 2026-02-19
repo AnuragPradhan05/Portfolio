@@ -7,7 +7,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-const ProjectCard = ({ title, description, tech, github, live }) => {
+const ProjectCard = ({ title, description, tech, github, live, image }) => {
   const [flipped, setFlipped] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
 
@@ -19,6 +19,11 @@ const ProjectCard = ({ title, description, tech, github, live }) => {
         <div className="project-inner">
           {/* ================= FRONT ================= */}
           <div className="project-front">
+
+            {image && (
+              <img src={image} alt={title} className="project-img" />
+            )}
+
             <h3>{title}</h3>
             <p>{description}</p>
 

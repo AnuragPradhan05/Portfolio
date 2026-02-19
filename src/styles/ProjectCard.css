@@ -1,7 +1,7 @@
 /* ================= Card Wrapper ================= */
 .project-card {
   perspective: 1000px;
-  height: 260px;
+  height: 400px;
 }
 
 /* ================= Inner Flip ================= */
@@ -144,7 +144,7 @@
 /* ================= Mobile ================= */
 @media (max-width: 600px) {
   .project-card {
-    height: 240px;
+    height: 380px;
   }
 
   .project-front,
@@ -292,5 +292,57 @@
 
   .demo-cred {
     font-size: 0.85rem;
+  }
+}
+
+/* ================= Project Image ================= */
+.project-img {
+  width: 100%;
+  height: 175 px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 140, 0, 0.15);
+  transition: 0.25s ease;
+}
+
+/* Hover only on desktop (prevents zoom bug on touch devices) */
+@media (hover: hover) and (pointer: fine) {
+  .project-img:hover {
+    transform: scale(1.02);
+    border-color: rgba(255, 140, 0, 0.35);
+  }
+}
+
+/* ================= Tablet ================= */
+@media (max-width: 900px) {
+  .project-img {
+    height: 200px;
+    border-radius: 9px;
+  }
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 600px) {
+  .project-img {
+    height: 190px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+}
+
+/* ================= Small Mobile ================= */
+@media (max-width: 420px) {
+  .project-img {
+    height: 200px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+  }
+}
+
+/* ================= Ultra Small Screens ================= */
+@media (max-width: 360px) {
+  .project-img {
+    height: 200px;
   }
 }

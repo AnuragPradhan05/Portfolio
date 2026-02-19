@@ -13,7 +13,7 @@ const About = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1, ease: "easeInOut" }}
     >
-      {/* 🔥 Floating background icons (same as Home) */}
+      {/* Floating background icons */}
       <FloatingIcons />
 
       <div className="about-container">
@@ -32,38 +32,69 @@ const About = () => {
             <span>About Me</span>
           </motion.h1>
 
+          {/* Intro */}
           <motion.p
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
           >
-            Hey there! 👋 I'm <strong>Anurag Pradhan</strong> — a passionate web developer 
-            who loves turning creative ideas into reality through clean code and bold designs.  
-            My journey began with curiosity for how digital things work, and it’s evolved into 
-            a full-blown obsession with crafting modern, functional, and visually engaging experiences.
+            Hey there 👋 I'm <strong>Anurag Pradhan</strong>, a passionate Web Developer who loves building
+            clean, responsive, and user-focused digital experiences.
           </motion.p>
 
-          <motion.p
+          {/* What I Do */}
+          <motion.ul
+            className="about-points"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 1 }}
+          >
+            <li>💻 Build full-stack applications using React, Angular & Spring Boot</li>
+            <li>⚡ Focus on performance, clean code & responsive UI</li>
+            <li>🚀 Fast learner who enjoys solving real-world problems</li>
+            <li>🎯 Passionate about turning ideas into working products</li>
+          </motion.ul>
+
+          {/* Tech Stack Badges */}
+          <motion.div
+            className="tech-stack"
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1 }}
           >
-            I specialize in building responsive websites using React, Node.js, and modern frameworks.  
-            Beyond development, I care about design, user psychology, and how technology can 
-            make ideas feel alive. Let’s build something amazing together.
+            <span>React</span>
+            <span>Angular</span>
+            <span>Spring Boot</span>
+            <span>JavaScript</span>
+            <span>Java</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Firebase</span>
+            <span>PostgreSQL</span>
+            <span>Python</span>
+            <span>MySQL</span>
+
+          </motion.div>
+
+          {/* Goal */}
+          <motion.p
+            className="about-goal"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 1 }}
+          >
+            Currently seeking opportunities as a <strong>Software / Web Developer</strong>
+            to contribute, grow, and build impactful digital solutions.
           </motion.p>
         </motion.div>
 
-        {/* ---------- Right: Floating Animated Image ---------- */}
+        {/* ---------- Right: Image ---------- */}
         <motion.div
           className="about-image"
           initial={{ opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          whileHover={{
-            scale: 1.05,
-            rotate: 1,
-          }}
+          whileHover={{ scale: 1.05, rotate: 1 }}
         >
           <motion.img
             src={myPic}

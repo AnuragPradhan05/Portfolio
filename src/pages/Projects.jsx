@@ -3,7 +3,10 @@ import "../styles/Projects.css";
 import { motion } from "framer-motion";
 import ProjectCard from "../components/ProjectCard";
 import FloatingIcons from "/src/components/FloatingIcons";
-
+import smartbizImg from "/src/assets/smartbiz.jpg";
+import jrtransportImg from "/src/assets/JrTransport.png";
+import snakeImg from "/src/assets/SnakeGame.jpg";
+import pythonImg from "/src/assets/PP.jpg";
 import { FaTimes } from "react-icons/fa";
 
 import cert2 from "/src/assets/certificate/certificate1.jpg";
@@ -12,44 +15,49 @@ import cert1 from "/src/assets/certificate/certificate2.jpg";
 const Projects = () => {
   const [activeCert, setActiveCert] = useState(null);
 
-  const projects = [
-    {
-      title: "SmartBiz App",
-      desc: "A modern business management platform with role-based dashboards.",
-      tech: ["Angular", "TypeScript"],
-      github: "https://github.com/AnuragPradhan05/smartbiz",
-      live: "https://smartbiz-zhej.onrender.com/",
-    },
-    {
-      title: "JR Transport",
-      desc: "Driver & Transport Management System with clean UI.",
-      tech: ["Angular", "Spring Boot"],
-      github: [
-        {
-          name: "Frontend (Angular)",
-          url: "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular",
-        },
-        {
-          name: "Backend (Spring Boot)",
-          url: "https://github.com/Motuitionapplication/JrTransportManagement-BackEnd-Spring",
-        },
-      ],
-    },
-    {
-      title: "Snake Game",
-      desc: "Classic snake game built using Python pygame.",
-      tech: ["Python"],
-      github: "https://github.com/AnuragPradhan05/Snake_game",
-      live: "",
-    },
-    {
-      title: "Python Mini Projects",
-      desc: "KBC, Tic Tac Toe, Rock Paper Scissor, Book Store, etc.",
-      tech: ["Python"],
-      github: "https://github.com/AnuragPradhan05/python_projects/tree/main/projects",
-      live: "",
-    },
-  ];
+    const projects = [
+      {
+        title: "SmartBiz App",
+        desc: "A modern business management platform with role-based dashboards.",
+        tech: ["Angular", "TypeScript"],
+        github: "https://github.com/AnuragPradhan05/smartbiz",
+        live: "https://smartbiz-zhej.onrender.com/",
+        image: smartbizImg,
+      },
+      {
+        title: "JR Transport",
+        desc: "Driver & Transport Management System with clean UI.",
+        tech: ["Angular", "Spring Boot"],
+        github: [
+          {
+            name: "Frontend (Angular)",
+            url: "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular",
+          },
+          {
+            name: "Backend (Spring Boot)",
+            url: "https://github.com/Motuitionapplication/JrTransportManagement-BackEnd-Spring",
+          },
+        ],
+        image: jrtransportImg,
+      },
+      {
+        title: "Snake Game",
+        desc: "Classic snake game built using Python pygame.",
+        tech: ["Python"],
+        github: "https://github.com/AnuragPradhan05/Snake_game",
+        live: "",
+        image: snakeImg,
+      },
+      {
+        title: "Python Mini Projects",
+        desc: "KBC, Tic Tac Toe, Rock Paper Scissor, Book Store, etc.",
+        tech: ["Python"],
+        github:
+          "https://github.com/AnuragPradhan05/python_projects/tree/main/projects",
+        live: "",
+        image: pythonImg,
+      },
+    ];
 
   const certificates = [
     {
@@ -84,13 +92,14 @@ const Projects = () => {
             transition={{ duration: 0.45, delay: i * 0.12 }}
             viewport={{ once: true }}
           >
-            <ProjectCard
-              title={p.title}
-              description={p.desc}
-              tech={p.tech}
-              github={p.github}
-              live={p.live}
-            />
+          <ProjectCard
+            title={p.title}
+            description={p.desc}
+            tech={p.tech}
+            github={p.github}
+            live={p.live}
+            image={p.image}
+          />
           </motion.div>
         ))}
       </div>
