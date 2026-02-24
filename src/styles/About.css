@@ -147,8 +147,8 @@
 }
 
 .about-image img {
-  width: 260px;
-  height: 380px;
+  width: 300px;
+  height: 350px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255, 140, 0, 0.7);
