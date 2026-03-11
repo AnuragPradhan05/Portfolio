@@ -2,6 +2,7 @@
 .project-card {
   perspective: 1000px;
   height: 400px;
+  box-sizing: border-box;
 }
 
 /* ================= Inner Flip ================= */
@@ -22,21 +23,18 @@
 .project-back {
   position: absolute;
   inset: 0;
-
   background: rgba(15, 15, 15, 0.6);
   border: 1px solid rgba(255, 140, 0, 0.15);
   border-radius: 14px;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   backface-visibility: hidden;
   transition: border-color 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
 }
 
-/* Back rotated */
 .project-back {
   transform: rotateY(180deg);
   align-items: center;
@@ -44,7 +42,7 @@
   gap: 14px;
 }
 
-/* Hover lift (only desktop) */
+/* Hover lift — desktop only */
 @media (hover: hover) and (pointer: fine) {
   .project-front:hover {
     transform: translateY(-4px);
@@ -92,19 +90,15 @@
   position: absolute;
   bottom: 12px;
   right: 12px;
-
   background: rgba(255, 140, 0, 0.15);
   border: none;
   color: #ffb266;
-
   width: 34px;
   height: 34px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -121,17 +115,13 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-
   text-decoration: none;
   font-size: 0.9rem;
   color: #ffb266;
-
   padding: 8px 14px;
   border-radius: 8px;
-
   border: 1px solid rgba(255, 140, 0, 0.25);
   background: rgba(255, 140, 0, 0.08);
-
   transition: 0.2s ease;
 }
 
@@ -141,35 +131,23 @@
   transform: translateY(-2px);
 }
 
-/* ================= Mobile ================= */
-@media (max-width: 600px) {
-  .project-card {
-    height: 380px;
-  }
-
-  .project-front,
-  .project-back {
-    padding: 16px;
-    border-radius: 12px;
-  }
-
-  .project-front h3,
-  .project-back h3 {
-    font-size: 1.1rem;
-  }
-
-  .project-front p {
-    font-size: 0.9rem;
-  }
+/* ================= Project Image ================= */
+.project-img {
+  width: 100%;
+  height: 175px; /* fixed typo: was "175 px" */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 140, 0, 0.15);
+  transition: 0.25s ease;
 }
 
-/* ================= Accessibility ================= */
-@media (prefers-reduced-motion: reduce) {
-  .project-inner {
-    transition: none;
+@media (hover: hover) and (pointer: fine) {
+  .project-img:hover {
+    transform: scale(1.02);
+    border-color: rgba(255, 140, 0, 0.35);
   }
 }
-
 
 /* ================= Demo Button ================= */
 .demo-btn {
@@ -188,21 +166,20 @@
   box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
 }
 
-
 /* ================= Modal ================= */
 .demo-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.78);
+  background: rgba(0, 0, 0, 0.78);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   padding: 16px;
+  box-sizing: border-box;
 }
 
-/* Popup Box */
 .demo-box {
   position: relative;
   background: #0b0b0b;
@@ -211,11 +188,11 @@
   width: min(92%, 360px);
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 0 25px rgba(0,0,0,0.65);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.65);
   text-align: left;
+  box-sizing: border-box;
 }
 
-/* Title */
 .demo-box h3 {
   text-align: center;
   margin-bottom: 14px;
@@ -223,12 +200,11 @@
   color: #ffb266;
 }
 
-/* Close Button */
 .demo-close {
   position: absolute;
   top: 6px;
   right: 8px;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   border: none;
   color: white;
   width: 28px;
@@ -243,7 +219,6 @@
   transform: scale(1.08);
 }
 
-/* Credentials */
 .demo-cred {
   margin-bottom: 12px;
   font-size: clamp(0.82rem, 2.2vw, 0.9rem);
@@ -259,16 +234,133 @@
   word-break: break-word;
 }
 
+/* ================= Accessibility ================= */
+@media (prefers-reduced-motion: reduce) {
+  .project-inner {
+    transition: none;
+  }
+}
 
-/* ================= Mobile Optimization ================= */
-@media (max-width: 480px) {
+/* ============================================================
+   RESPONSIVE — ALL MOBILE VIEWS
+   ============================================================ */
+
+/* ---------- Tablet (≤ 900px) ---------- */
+@media (max-width: 900px) {
+  .project-card {
+    height: 420px;
+  }
+
+  .project-img {
+    height: 195px;
+    border-radius: 9px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1.15rem;
+  }
+
+  .project-front p {
+    font-size: 0.93rem;
+  }
+}
+
+/* ---------- Large phones (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .project-card {
+    height: 410px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .project-img {
+    height: 185px;
+    border-radius: 9px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-front p {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .project-link {
+    font-size: 0.88rem;
+    padding: 7px 12px;
+  }
+
+  .demo-box {
+    width: min(94%, 340px);
+  }
+}
+
+/* ---------- Standard phones (≤ 600px) ---------- */
+@media (max-width: 600px) {
+  .project-card {
+    height: 390px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 14px;
+    border-radius: 11px;
+    gap: 10px;
+  }
+
+  .project-img {
+    height: 185px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  .project-front p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .tech-stack span {
+    font-size: 0.7rem;
+    padding: 3px 9px;
+  }
+
+  .flip-btn {
+    width: 30px;
+    height: 30px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .project-link {
+    font-size: 0.85rem;
+    padding: 7px 11px;
+    border-radius: 7px;
+  }
+
+  /* Modal slides up from bottom on mobile */
   .demo-modal {
-    align-items: flex-end;   /* slide from bottom feel */
+    align-items: flex-end;
+    padding: 0;
   }
 
   .demo-box {
     width: 100%;
-    border-radius: 14px 14px 0 0;
+    border-radius: 16px 16px 0 0;
     max-height: 75vh;
     padding: 16px;
   }
@@ -283,66 +375,209 @@
   }
 }
 
+/* ---------- Small phones (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .project-card {
+    height: 375px;
+  }
 
-/* ================= Small Mobile ================= */
-@media (max-width: 360px) {
+  .project-front,
+  .project-back {
+    padding: 13px;
+    border-radius: 10px;
+  }
+
+  .project-img {
+    height: 175px;
+    margin-bottom: 7px;
+    border-radius: 8px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1rem;
+  }
+
+  .project-front p {
+    font-size: 0.87rem;
+    line-height: 1.4;
+  }
+
+  .tech-stack span {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  .flip-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .project-link {
+    font-size: 0.83rem;
+    padding: 6px 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .demo-btn {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
   .demo-box {
+    max-height: 78vh;
+  }
+
+  .demo-cred {
+    font-size: 0.86rem;
+  }
+}
+
+/* ---------- Extra small phones (≤ 380px) — iPhone SE ---------- */
+@media (max-width: 380px) {
+  .project-card {
+    height: 365px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 11px;
+    border-radius: 9px;
+  }
+
+  .project-img {
+    height: 160px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .project-front p {
+    font-size: 0.84rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .tech-stack {
+    gap: 5px;
+  }
+
+  .tech-stack span {
+    font-size: 0.65rem;
+    padding: 3px 7px;
+  }
+
+  .flip-btn {
+    width: 26px;
+    height: 26px;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .project-link {
+    font-size: 0.8rem;
+    padding: 6px 9px;
+  }
+
+  .demo-box {
+    max-height: 80vh;
     padding: 14px;
   }
 
   .demo-cred {
-    font-size: 0.85rem;
+    font-size: 0.84rem;
   }
 }
 
-/* ================= Project Image ================= */
-.project-img {
-  width: 100%;
-  height: 175 px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(255, 140, 0, 0.15);
-  transition: 0.25s ease;
-}
-
-/* Hover only on desktop (prevents zoom bug on touch devices) */
-@media (hover: hover) and (pointer: fine) {
-  .project-img:hover {
-    transform: scale(1.02);
-    border-color: rgba(255, 140, 0, 0.35);
+/* ---------- Tiny phones (≤ 320px) — Galaxy Fold ---------- */
+@media (max-width: 320px) {
+  .project-card {
+    height: 350px;
   }
-}
 
-/* ================= Tablet ================= */
-@media (max-width: 900px) {
-  .project-img {
-    height: 200px;
-    border-radius: 9px;
-  }
-}
-
-/* ================= Mobile ================= */
-@media (max-width: 600px) {
-  .project-img {
-    height: 190px;
-    margin-bottom: 8px;
+  .project-front,
+  .project-back {
+    padding: 10px;
     border-radius: 8px;
   }
-}
 
-/* ================= Small Mobile ================= */
-@media (max-width: 420px) {
   .project-img {
-    height: 200px;
-    margin-bottom: 6px;
-    border-radius: 7px;
+    height: 145px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 0.9rem;
+  }
+
+  .project-front p {
+    font-size: 0.8rem;
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+
+  .tech-stack span {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+  }
+
+  .flip-btn {
+    width: 24px;
+    height: 24px;
+    bottom: 7px;
+    right: 7px;
+  }
+
+  .project-link {
+    font-size: 0.78rem;
+    padding: 5px 8px;
+  }
+
+  .demo-btn {
+    font-size: 0.74rem;
+    padding: 5px 9px;
+  }
+
+  .demo-box {
+    padding: 12px;
+  }
+
+  .demo-cred {
+    font-size: 0.8rem;
   }
 }
 
-/* ================= Ultra Small Screens ================= */
-@media (max-width: 360px) {
+/* ---------- Landscape phones (height ≤ 500px) ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .project-card {
+    height: 340px;
+  }
+
   .project-img {
-    height: 200px;
+    height: 140px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 12px;
+  }
+
+  .demo-modal {
+    align-items: center;
+    padding: 12px;
+  }
+
+  .demo-box {
+    width: min(90%, 400px);
+    max-height: 90vh;
+    border-radius: 12px;
   }
 }

@@ -229,3 +229,7 @@
     background: rgba(18,18,18,0.92);
   }
 }
+
+.ap-tab svg{
+  font-size: 18px;
+}

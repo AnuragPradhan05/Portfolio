@@ -7,6 +7,7 @@ import smartbizImg from "/src/assets/smartbiz.jpg";
 import jrtransportImg from "/src/assets/JrTransport.png";
 import snakeImg from "/src/assets/SnakeGame.jpg";
 import pythonImg from "/src/assets/PP.jpg";
+import bloomifyImg from "/src/assets/bloomify.png"
 import { FaTimes } from "react-icons/fa";
 
 import cert2 from "/src/assets/certificate/certificate1.jpg";
@@ -17,8 +18,16 @@ const Projects = () => {
 
     const projects = [
       {
+        title: "Bloomify",
+        desc: "Where emotions bloom into petals. A beautiful platform to transform feelings into digital flowers.",
+        tech: ["React", "Firebase"],
+        github: "https://github.com/AnuragPradhan05/Bloomify",
+        live: "https://bloomify-ashen.vercel.app/",
+        image: bloomifyImg,
+      },
+      {
         title: "SmartBiz App",
-        desc: "A modern business management platform with role-based dashboards.",
+        desc: "A modern business management platform.",
         tech: ["Angular", "TypeScript"],
         github: "https://github.com/AnuragPradhan05/smartbiz",
         live: "https://smartbiz-zhej.onrender.com/",

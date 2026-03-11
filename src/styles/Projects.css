@@ -1,68 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
-
 /* ================= Page ================= */
 .projects-page {
   padding: clamp(50px, 6vw, 80px) clamp(16px, 6vw, 7%);
   min-height: 100vh;
   background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  box-sizing: border-box;
 }
-
 
 /* ================= Title ================= */
 .projects-title {
   display: block;
   width: fit-content;
   margin: 8% auto clamp(35px, 5vw, 60px) auto;
-
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   font-weight: 800;
-
   background: linear-gradient(90deg, #ff8c00, #ffa500, #ff4500);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   text-transform: uppercase;
   letter-spacing: 2px;
-
   text-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
-
   animation: glowText 4s ease-in-out infinite alternate;
-  position: relative; /* needed for underline */
+  position: relative;
+  transition: transform 0.2s ease;
 }
 
-/* Glow animation */
 @keyframes glowText {
-  0% {
-    text-shadow: 0 0 10px rgba(255,140,0,0.4),
-                 0 0 20px rgba(255,140,0,0.2);
-  }
-  100% {
-    text-shadow: 0 0 25px rgba(255,140,0,0.8),
-                 0 0 45px rgba(255,165,0,0.6);
-  }
+  0%   { text-shadow: 0 0 10px rgba(255,140,0,0.4), 0 0 20px rgba(255,140,0,0.2); }
+  100% { text-shadow: 0 0 25px rgba(255,140,0,0.8), 0 0 45px rgba(255,165,0,0.6); }
 }
 
-/* ===== Decorative Underline ===== */
 .projects-title::after {
   content: "";
   display: block;
   width: 80px;
   height: 4px;
   background: linear-gradient(90deg, #ff8c00, #ff4500);
-  margin: 12px auto 0 auto; /* centers underline */
+  margin: 12px auto 0 auto;
   border-radius: 2px;
   box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
 
-/* Optional subtle hover */
 .projects-title:hover {
   transform: scale(1.02);
 }
-
 
 /* ================= Grid ================= */
 .projects-grid {
@@ -72,39 +57,7 @@
   align-items: stretch;
 }
 
-
-/* ================= Tablet ================= */
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(16px, 2.8vw, 26px);
-  }
-}
-
-
-/* ================= Mobile ================= */
-@media (max-width: 600px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-}
-
-
-/* ================= Small Mobile ================= */
-@media (max-width: 420px) {
-  .projects-page {
-    padding: 45px 4%;
-  }
-
-  .projects-title {
-    font-size: 1.6rem;
-  }
-}
-
-
-/* ================= Certificates ================= */
-
+/* ================= Certificates Title ================= */
 .certificates-title {
   display: flex;
   align-items: center;
@@ -121,64 +74,23 @@
   padding: 0 10px;
 }
 
-/* glowing lines left & right */
 .cert-line {
   width: 60px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #00eaff, transparent);
   box-shadow: 0 0 8px rgba(0, 234, 255, 0.7);
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
-/* ===== Tablet ===== */
-@media (max-width: 900px) {
-  .certificates-title {
-    font-size: 24px;
-    gap: 14px;
-    margin-top: 45px;
-  }
-
-  .cert-line {
-    width: 45px;
-  }
-}
-
-/* ===== Mobile ===== */
-@media (max-width: 600px) {
-  .certificates-title {
-    font-size: 20px;
-    gap: 10px;
-    margin-top: 35px;
-    letter-spacing: 0.5px;
-  }
-
-  .cert-line {
-    width: 30px;
-  }
-}
-
-/* ===== Small Mobile ===== */
-@media (max-width: 400px) {
-  .certificates-title {
-    font-size: 18px;
-    gap: 8px;
-  }
-
-  .cert-line {
-    width: 22px;
-  }
-}
-
-
-
-/* Grid auto responsive */
+/* ================= Cert Grid ================= */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: clamp(14px, 2.5vw, 22px);
 }
 
-/* Card */
+/* ================= Cert Card ================= */
 .cert-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -187,6 +99,7 @@
   backdrop-filter: blur(6px);
   transition: 0.25s ease;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .cert-card:hover {
@@ -194,7 +107,6 @@
   border-color: rgba(99, 102, 241, 0.45);
 }
 
-/* Image */
 .cert-img {
   width: 100%;
   height: clamp(140px, 22vw, 180px);
@@ -203,14 +115,12 @@
   margin-bottom: 10px;
 }
 
-/* Title */
 .cert-card h3 {
   color: #f9fafb;
   font-size: clamp(0.9rem, 1.6vw, 1rem);
   margin-bottom: 10px;
 }
 
-/* Button */
 .cert-btn {
   background: linear-gradient(90deg, #ff8c00, #ff6a00);
   border: none;
@@ -226,9 +136,7 @@
   transform: scale(1.05);
 }
 
-
-/* ================= Popup ================= */
-
+/* ================= Cert Modal ================= */
 .cert-modal {
   position: fixed;
   inset: 0;
@@ -239,9 +147,9 @@
   justify-content: center;
   z-index: 9999;
   padding: 16px;
+  box-sizing: border-box;
 }
 
-/* Popup box */
 .cert-popup-container {
   position: relative;
   background: #0b0b0b;
@@ -250,22 +158,21 @@
   width: min(92%, 560px);
   max-height: 90vh;
   overflow: auto;
-  box-shadow: 0 0 30px rgba(0,0,0,0.65);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.65);
+  box-sizing: border-box;
 }
 
-/* Popup Image */
 .cert-popup-img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-/* Close Button */
 .cert-close {
   position: absolute;
   top: 6px;
   right: 8px;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   border: none;
   color: white;
   font-size: 15px;
@@ -284,34 +191,346 @@
   transform: rotate(90deg) scale(1.08);
 }
 
+/* ============================================================
+   RESPONSIVE — ALL MOBILE VIEWS
+   ============================================================ */
 
-/* ================= Tablet ================= */
+/* ---------- Tablet (≤ 900px) ---------- */
 @media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.8vw, 26px);
+  }
+
+  .projects-title {
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+  }
+
+  .certificates-title {
+    font-size: 24px;
+    gap: 14px;
+    margin-top: 45px;
+  }
+
+  .cert-line {
+    width: 45px;
+  }
+
   .cert-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* ---------- Large phones (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .projects-page {
+    padding: clamp(40px, 5vw, 65px) clamp(14px, 5%, 5%);
+  }
 
-/* ================= Mobile ================= */
+  .projects-title {
+    font-size: 2.2rem;
+    letter-spacing: 1.2px;
+    margin-top: 10%;
+  }
+
+  .projects-title::after {
+    width: 65px;
+    height: 3px;
+  }
+
+  .projects-grid {
+    gap: clamp(14px, 2.5vw, 22px);
+  }
+
+  .certificates-title {
+    font-size: 22px;
+    gap: 12px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .cert-line {
+    width: 38px;
+  }
+
+  .cert-img {
+    height: clamp(130px, 20vw, 165px);
+  }
+
+  .cert-popup-container {
+    width: min(95%, 500px);
+  }
+}
+
+/* ---------- Standard phones (≤ 600px) ---------- */
 @media (max-width: 600px) {
+  .projects-page {
+    padding: 45px 4% 50px;
+  }
+
+  .projects-title {
+    font-size: 1.9rem;
+    letter-spacing: 1px;
+    margin-top: 12%;
+  }
+
+  .projects-title::after {
+    width: 55px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .certificates-title {
+    font-size: 20px;
+    gap: 10px;
+    margin-top: 35px;
+    letter-spacing: 0.5px;
+  }
+
+  .cert-line {
+    width: 30px;
+  }
+
   .cert-grid {
     grid-template-columns: 1fr;
   }
 
+  .cert-img {
+    height: clamp(130px, 40vw, 160px);
+  }
+
   .cert-popup-container {
     width: 95%;
+    padding: 10px;
+  }
+
+  /* Modal slides from bottom on mobile */
+  .cert-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .cert-popup-container {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 88vh;
   }
 }
 
+/* ---------- Small phones (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .projects-page {
+    padding: 40px 4% 45px;
+  }
 
-/* ================= Small Mobile ================= */
-@media (max-width: 420px) {
+  .projects-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.8px;
+  }
+
+  .projects-title::after {
+    width: 50px;
+    height: 3px;
+    margin-top: 10px;
+  }
+
+  .certificates-title {
+    font-size: 18px;
+    gap: 9px;
+    margin-top: 30px;
+    margin-bottom: 14px;
+  }
+
+  .cert-line {
+    width: 26px;
+  }
+
+  .cert-card {
+    border-radius: 12px;
+  }
+
   .cert-img {
     height: 135px;
   }
 
+  .cert-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .cert-popup-container {
+    max-height: 85vh;
+    padding: 10px;
+  }
+
+  .cert-close {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ---------- Extra small phones (≤ 380px) — iPhone SE ---------- */
+@media (max-width: 380px) {
+  .projects-page {
+    padding: 35px 3.5% 40px;
+  }
+
+  .projects-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .projects-title::after {
+    width: 44px;
+    height: 3px;
+  }
+
+  .projects-grid {
+    gap: 16px;
+  }
+
+  .certificates-title {
+    font-size: 16px;
+    gap: 8px;
+    margin-top: 25px;
+    margin-bottom: 12px;
+  }
+
+  .cert-line {
+    width: 22px;
+  }
+
+  .cert-card {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .cert-img {
+    height: 125px;
+    border-radius: 6px;
+  }
+
+  .cert-card h3 {
+    font-size: 0.88rem;
+    margin-bottom: 8px;
+  }
+
+  .cert-btn {
+    font-size: 0.76rem;
+    padding: 5px 11px;
+  }
+
   .cert-popup-container {
     padding: 8px;
+    max-height: 82vh;
+  }
+}
+
+/* ---------- Tiny phones (≤ 320px) — Galaxy Fold ---------- */
+@media (max-width: 320px) {
+  .projects-page {
+    padding: 30px 3% 35px;
+  }
+
+  .projects-title {
+    font-size: 1.3rem;
+    letter-spacing: 0.3px;
+  }
+
+  .projects-title::after {
+    width: 38px;
+    height: 2px;
+  }
+
+  .projects-grid {
+    gap: 14px;
+  }
+
+  .certificates-title {
+    font-size: 14px;
+    gap: 6px;
+    margin-top: 22px;
+  }
+
+  .cert-line {
+    width: 18px;
+  }
+
+  .cert-card {
+    padding: 9px;
+    border-radius: 9px;
+  }
+
+  .cert-img {
+    height: 115px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .cert-card h3 {
+    font-size: 0.82rem;
+  }
+
+  .cert-btn {
+    font-size: 0.72rem;
+    padding: 5px 9px;
+  }
+
+  .cert-popup-container {
+    padding: 7px;
+    max-height: 80vh;
+  }
+
+  .cert-close {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+}
+
+/* ---------- Landscape phones (height ≤ 500px) ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .projects-page {
+    padding: 25px 5% 35px;
+  }
+
+  .projects-title {
+    font-size: 1.7rem;
+    margin-top: 4%;
+    margin-bottom: 20px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .certificates-title {
+    font-size: 18px;
+    margin-top: 25px;
+  }
+
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cert-img {
+    height: 120px;
+  }
+
+  /* Full-screen modal in landscape */
+  .cert-modal {
+    align-items: center;
+    padding: 12px;
+  }
+
+  .cert-popup-container {
+    width: min(85%, 520px);
+    max-height: 90vh;
+    border-radius: 12px;
   }
 }

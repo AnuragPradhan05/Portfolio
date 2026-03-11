@@ -1,13 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaHome, FaUser, FaCode, FaEnvelope } from "react-icons/fa";
+import { FaHome, FaUser, FaCode, FaEnvelope, FaBars } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import "/src/styles/navbar.css";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
   const location = useLocation();
   const wrapperRef = useRef();
+
+  // Detect screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Close when clicking outside
   useEffect(() => {
@@ -16,6 +28,7 @@ const Navbar = () => {
         setOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -28,19 +41,24 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="floating-nav-wrapper" ref={wrapperRef}>
-      
-      {/* AP Floating Tab */}
+    <div
+      className="floating-nav-wrapper"
+      ref={wrapperRef}
+      onMouseLeave={!isMobile ? () => setOpen(false) : undefined}
+    >
+
+      {/* AP Floating Button */}
       <motion.div
         className="ap-tab"
-        onClick={() => setOpen(!open)}
+        onMouseEnter={!isMobile ? () => setOpen(true) : undefined}
+        onClick={isMobile ? () => setOpen(!open) : undefined}
         whileTap={{ scale: 0.9 }}
         animate={{ scale: open ? 1.05 : 1 }}
       >
-        AP
+       {isMobile ? <FaBars /> : "AP"}
       </motion.div>
 
-      {/* Expanding Floating Panel */}
+      {/* Dropdown Menu */}
       <AnimatePresence>
         {open && (
           <motion.div

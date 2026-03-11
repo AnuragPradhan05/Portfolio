@@ -13,6 +13,7 @@
   padding: 4rem 8%;
   z-index: 1;
   font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
 }
 
 .about-container {
@@ -163,11 +164,42 @@
   transform: scale(1.03);
 }
 
-/* ---------- Responsive ---------- */
+/* ============================================================
+   RESPONSIVE BREAKPOINTS — ALL MOBILE VIEWS
+   ============================================================ */
+
+/* ---------- Tablets & small laptops (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  .about {
+    padding: 4rem 6%;
+  }
+
+  .about-content h1 span {
+    font-size: 3.2rem;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+  }
+
+  .about-image img {
+    width: 270px;
+    height: 320px;
+  }
+}
+
+/* ---------- Tablets portrait & large phones (≤ 900px) ---------- */
 @media (max-width: 900px) {
+  .about {
+    padding: 5rem 6%;
+    align-items: flex-start;
+  }
+
   .about-container {
     flex-direction: column-reverse;
+    align-items: center;
     text-align: center;
+    gap: 2.5rem;
   }
 
   .about-content h1 span {
@@ -175,12 +207,18 @@
   }
 
   .about-content h1::after {
-    margin: 12px auto;
+    margin: 12px auto 0;
   }
 
   .about-content p {
     font-size: 1rem;
-    margin: 0.8rem auto;
+    margin: 0.9rem auto;
+    max-width: 100%;
+  }
+
+  .about-points {
+    text-align: left;
+    display: inline-block;
   }
 
   .tech-stack {
@@ -189,16 +227,238 @@
 
   .about-image img {
     width: 250px;
-    height: 350px;
+    height: 300px;
   }
 }
 
-@media (max-width: 500px) {
+/* ---------- Large phones landscape & mid phones (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .about {
+    padding: 4.5rem 5%;
+    min-height: auto;
+  }
+
+  .about-container {
+    gap: 2rem;
+  }
+
   .about-content h1 span {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
+    letter-spacing: 1.5px;
+  }
+
+  .about-content p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    margin: 0.8rem auto;
+  }
+
+  .about-points {
+    font-size: 0.97rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+  }
+
+  .about-image img {
+    width: 220px;
+    height: 265px;
+  }
+}
+
+/* ---------- Standard phones (≤ 600px) ---------- */
+@media (max-width: 600px) {
+  .about {
+    padding: 4rem 4.5%;
+  }
+
+  .about-content h1 span {
+    font-size: 2.3rem;
+    letter-spacing: 1px;
   }
 
   .about-content p {
     font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .about-points {
+    font-size: 0.93rem;
+  }
+
+  .tech-stack {
+    gap: 8px;
+  }
+
+  .tech-stack span {
+    font-size: 0.78rem;
+    padding: 5px 11px;
+  }
+
+  .about-image img {
+    width: 200px;
+    height: 240px;
+  }
+}
+
+/* ---------- Small phones (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .about {
+    padding: 3.5rem 5%;
+  }
+
+  .about-container {
+    gap: 1.8rem;
+  }
+
+  .about-content h1 span {
+    font-size: 2rem;
+    letter-spacing: 0.8px;
+  }
+
+  .about-content h1::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .about-content p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0.7rem auto;
+  }
+
+  .about-points {
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .about-points li {
+    margin-bottom: 6px;
+  }
+
+  .tech-stack {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .tech-stack span {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .about-goal {
+    font-size: 0.92rem;
+    margin-top: 12px;
+  }
+
+  .about-image img {
+    width: 180px;
+    height: 215px;
+  }
+}
+
+/* ---------- Extra small phones (≤ 380px) — e.g. iPhone SE ---------- */
+@media (max-width: 380px) {
+  .about {
+    padding: 3rem 4%;
+  }
+
+  .about-content h1 span {
+    font-size: 1.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .about-content p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .about-points {
+    font-size: 0.86rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.72rem;
+    padding: 4px 9px;
+  }
+
+  .about-image img {
+    width: 160px;
+    height: 190px;
+  }
+}
+
+/* ---------- Tiny phones (≤ 320px) — e.g. Galaxy Fold ---------- */
+@media (max-width: 320px) {
+  .about {
+    padding: 2.5rem 3.5%;
+  }
+
+  .about-content h1 span {
+    font-size: 1.55rem;
+  }
+
+  .about-content p {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .about-points {
+    font-size: 0.82rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  .about-image img {
+    width: 140px;
+    height: 168px;
+  }
+}
+
+/* ---------- Landscape phones (short height) ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .about {
+    min-height: auto;
+    padding: 2.5rem 6%;
+  }
+
+  .about-container {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 2rem;
+  }
+
+  .about-content h1 span {
+    font-size: 2rem;
+  }
+
+  .about-content h1::after {
+    margin: 10px 0 0;
+  }
+
+  .about-content p {
+    font-size: 0.88rem;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+
+  .about-points {
+    font-size: 0.86rem;
+  }
+
+  .tech-stack {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .about-image img {
+    width: 150px;
+    height: 180px;
   }
 }
