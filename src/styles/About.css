@@ -1,464 +1,825 @@
-/* Import Fonts */
+/* =============================================================
+   ABOUT PAGE — v2  (3-section layout with scroll reveals)
+   Theme: dark bg  ·  orange gradient  ·  Playfair + Poppins
+   ============================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap');
 
-.about {
+/* ---- CSS Variables ---- */
+:root {
+  --orange-start: #ff8c00;
+  --orange-mid: #ffa500;
+  --orange-end: #ff4500;
+  --bg-dark: #0a0a0a;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --text-primary: #f2f2f2;
+  --text-muted: #bebdbd;
+}
+
+/* ============================================================
+   PAGE WRAPPER
+   ============================================================ */
+.about-v2 {
   position: relative;
-  min-height: 100vh;
   background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  padding: 4rem 8%;
-  z-index: 1;
+  color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* -- Shared section container -- */
+.section-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: clamp(60px, 8vw, 100px) clamp(16px, 7%, 7%) clamp(50px, 7vw, 80px);
   box-sizing: border-box;
-}
-
-.about-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  max-width: 1100px;
-  width: 100%;
   position: relative;
-  z-index: 2;
+  z-index: 3;               /* above floating icons (z-index: 2) */
 }
 
-/* ---------- Text Section ---------- */
-.about-content {
-  flex: 1;
+/* -- Shared gradient heading -- */
+.section-heading {
+  display: block;
+  margin-bottom: 0;
 }
 
-/* Gradient Heading */
-.about-content h1 span {
-  font-family: 'Playfair Display', serif;    
-  font-size: 3.8rem;
+.section-heading span {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: 800;
-  background: linear-gradient(90deg, #ff8c00, #ffa500, #ff4500);
+  background: linear-gradient(90deg, var(--orange-start), var(--orange-mid), var(--orange-end));
   background-clip: text;
-  -webkit-background-clip: text;  
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
-  display: inline-block;
   animation: glowText 4s ease-in-out infinite alternate;
+  display: inline-block;
 }
 
-/* Glow animation */
-@keyframes glowText {
-  0% { text-shadow: 0 0 10px rgba(255,140,0,0.4), 0 0 20px rgba(255,140,0,0.2); }
-  100% { text-shadow: 0 0 25px rgba(255,140,0,0.8), 0 0 45px rgba(255,165,0,0.6); }
+.section-heading.center {
+  text-align: center;
 }
 
-/* Decorative underline */
-.about-content h1::after {
+.section-heading::after,
+.section-heading.center::after {
   content: "";
   display: block;
-  width: 80px;
+  width: 70px;
   height: 4px;
-  background: linear-gradient(90deg, #ff8c00, #ff4500);
-  margin-top: 12px;
+  background: linear-gradient(90deg, var(--orange-start), var(--orange-end));
   border-radius: 2px;
+  margin-top: 12px;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.45);
 }
 
-/* Paragraphs */
-.about-content p {
-  font-size: 1.08rem;
-  line-height: 1.8;
-  margin: 1.1rem 0;
-  color: #bebdbd;
-  max-width: 560px;
+.section-heading.center::after {
+  margin-inline: auto;
+}
+
+@keyframes glowText {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 140, 0, .35), 0 0 20px rgba(255, 140, 0, .15);
+  }
+
+  100% {
+    text-shadow: 0 0 28px rgba(255, 140, 0, .85), 0 0 50px rgba(255, 165, 0, .60);
+  }
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  margin-top: 0.6rem;
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
   letter-spacing: 0.3px;
-  font-weight: 400;
-  transition: color 0.3s ease;
 }
 
-.about-content p:hover {
-  color: #ffffff;
-}
-
-/* ---------- Bullet Points ---------- */
-.about-points {
-  margin-top: 14px;
-  padding-left: 0;
-  color: #ddd;
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
-
-.about-points li {
-  margin-bottom: 8px;
-  list-style: none;
-  position: relative;
-  padding-left: 18px;
-}
-
-/* subtle glowing bullet */
-.about-points li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #ff8c00;
-  font-size: 1.3rem;
-  text-shadow: 0 0 8px rgba(255,140,0,0.6);
-}
-
-/* ---------- Tech Stack Badges ---------- */
-.tech-stack {
-  margin-top: 18px;
+/* ============================================================
+   SECTION 1 — BIO / PROFILE
+   ============================================================ */
+.about-bio-section {
+  min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  padding: 0 7%;
+  position: relative;
 }
 
-.tech-stack span {
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: 20px;
-  color: #fff;
-  background: linear-gradient(135deg, #ff8c00, #ff4500);
-  box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
-  transition: all 0.3s ease;
-  cursor: default;
+.about-bio-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  justify-content: space-between;
+  padding: 80px 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;               /* above floating icons */
 }
 
-.tech-stack span:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 0 18px rgba(255, 140, 0, 0.7);
-}
-
-/* ---------- Goal Text ---------- */
-.about-goal {
-  margin-top: 16px;
-  font-weight: 500;
-  color: #f2f2f2;
-}
-
-/* ---------- Image Section ---------- */
-.about-image {
+/* -- Bio text -- */
+.bio-text {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  position: relative;
+  max-width: 580px;
 }
 
-.about-image img {
+.bio-text .section-heading span {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+}
+
+.bio-intro {
+  font-size: clamp(0.94rem, 2vw, 1.08rem);
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin: 1.4rem 0;
+  letter-spacing: 0.3px;
+  transition: color 0.3s;
+}
+
+.bio-intro:hover {
+  color: #fff;
+}
+
+.highlight {
+  color: var(--orange-mid);
+  -webkit-text-fill-color: var(--orange-mid);
+  font-weight: 600;
+}
+
+.bio-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4rem;
+  color: #ddd;
+  font-size: clamp(0.9rem, 2vw, 1.02rem);
+  line-height: 1.8;
+}
+
+.bio-points li {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.bio-bullet-icon {
+  color: var(--orange-start);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 5px rgba(255,140,0,0.55));
+}
+
+.bio-goal {
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--text-muted);
+  font-weight: 400;
+  transition: color 0.3s;
+}
+
+.bio-goal:hover {
+  color: #fff;
+}
+
+/* -- Bio image -- */
+.bio-image-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bio-image-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.25) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: pulseGlow 3.5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.bio-photo {
   width: 300px;
   height: 350px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255, 140, 0, 0.7);
-  box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.45);
+  display: block;
   transition: all 0.5s ease;
   filter: brightness(0.95);
+  position: relative;
+  z-index: 1;
 }
 
-.about-image img:hover {
-  box-shadow: 0 0 45px rgba(255, 140, 0, 0.95);
+.bio-photo:hover {
+  box-shadow: 0 0 50px rgba(255, 140, 0, 0.9);
   filter: brightness(1.1);
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 /* ============================================================
-   RESPONSIVE BREAKPOINTS — ALL MOBILE VIEWS
+   SECTION 2 — TECH STACK
    ============================================================ */
-
-/* ---------- Tablets & small laptops (≤ 1024px) ---------- */
-@media (max-width: 1024px) {
-  .about {
-    padding: 4rem 6%;
-  }
-
-  .about-content h1 span {
-    font-size: 3.2rem;
-  }
-
-  .about-content p {
-    font-size: 1rem;
-  }
-
-  .about-image img {
-    width: 270px;
-    height: 320px;
-  }
+.about-tech-section {
+  position: relative;
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+  border-top: 1px solid var(--border-subtle);
 }
 
-/* ---------- Tablets portrait & large phones (≤ 900px) ---------- */
-@media (max-width: 900px) {
-  .about {
-    padding: 5rem 6%;
-    align-items: flex-start;
+.about-tech-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 90%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.5), transparent);
+}
+
+.tech-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.4rem;
+}
+
+.tech-cat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-cat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange-start), var(--orange-end));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tech-cat-card:hover {
+  border-color: rgba(255, 140, 0, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(255, 140, 0, 0.12);
+}
+
+.tech-cat-card:hover::before {
+  opacity: 1;
+}
+
+.tech-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.tech-cat-icon {
+  font-size: 1.3rem;
+  color: var(--orange-mid);
+  display: flex;
+  align-items: center;
+  /* ensure SVG icons scale correctly */
+  width: 1.3rem;
+  height: 1.3rem;
+  flex-shrink: 0;
+}
+
+.tech-cat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--orange-mid);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-badge {
+  padding: 5px 13px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.18), rgba(255, 69, 0, 0.15));
+  border: 1px solid rgba(255, 140, 0, 0.3);
+  transition: all 0.25s ease;
+  cursor: default;
+  letter-spacing: 0.3px;
+}
+
+.tech-badge:hover {
+  background: linear-gradient(135deg, var(--orange-start), var(--orange-end));
+  border-color: transparent;
+  box-shadow: 0 0 14px rgba(255, 140, 0, 0.55);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ============================================================
+   SECTION 3 — SERVICES
+   ============================================================ */
+.about-services-section {
+  position: relative;
+  background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.about-services-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 90%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.5), transparent);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.service-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 1.8rem 1.8rem 2rem;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: all 0.35s ease;
+  cursor: default;
+  /* Equal height: card fills the full grid-row height */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.service-card:hover {
+  border-color: rgba(255, 140, 0, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 45px rgba(255, 140, 0, 0.13);
+}
+
+.service-shine {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.service-card:hover .service-shine {
+  transform: scale(2.2);
+  opacity: 0.6;
+}
+
+.service-icon {
+  font-size: 1.9rem;
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  color: var(--orange-mid);
+  /* ensure SVG scales */
+  width: 1.9rem;
+  height: 1.9rem;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.service-title {
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--orange-mid);
+  margin-bottom: 0.65rem;
+  letter-spacing: 0.3px;
+}
+
+.service-desc {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  transition: color 0.3s;
+}
+
+.service-card:hover .service-desc {
+  color: #ddd;
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE-FIRST, EVERY BREAKPOINT
+   ============================================================ */
+
+/* ---- <= 1024px  (small laptops / large tablets) ---- */
+@media (max-width: 1024px) {
+  .about-bio-section {
+    padding: 0 6%;
   }
 
-  .about-container {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;
-    gap: 2.5rem;
+  .about-bio-inner {
+    gap: 3.5rem;
+    padding: 70px 0;
   }
 
-  .about-content h1 span {
-    font-size: 2.8rem;
-  }
-
-  .about-content h1::after {
-    margin: 12px auto 0;
-  }
-
-  .about-content p {
-    font-size: 1rem;
-    margin: 0.9rem auto;
-    max-width: 100%;
-  }
-
-  .about-points {
-    text-align: left;
-    display: inline-block;
-  }
-
-  .tech-stack {
-    justify-content: center;
-  }
-
-  .about-image img {
-    width: 250px;
+  .bio-photo {
+    width: 260px;
     height: 300px;
   }
 }
 
-/* ---------- Large phones landscape & mid phones (≤ 768px) ---------- */
-@media (max-width: 768px) {
-  .about {
-    padding: 4.5rem 5%;
+/* ---- <= 900px  (tablets portrait, large phones landscape) ---- */
+@media (max-width: 900px) {
+  .about-bio-section {
     min-height: auto;
+    padding: 0 6%;
   }
 
-  .about-container {
-    gap: 2rem;
-  }
-
-  .about-content h1 span {
-    font-size: 2.6rem;
-    letter-spacing: 1.5px;
-  }
-
-  .about-content p {
-    font-size: 0.97rem;
-    line-height: 1.75;
-    margin: 0.8rem auto;
-  }
-
-  .about-points {
-    font-size: 0.97rem;
-  }
-
-  .tech-stack span {
-    font-size: 0.8rem;
-    padding: 5px 12px;
-  }
-
-  .about-image img {
-    width: 220px;
-    height: 265px;
-  }
-}
-
-/* ---------- Standard phones (≤ 600px) ---------- */
-@media (max-width: 600px) {
-  .about {
-    padding: 4rem 4.5%;
-  }
-
-  .about-content h1 span {
-    font-size: 2.3rem;
-    letter-spacing: 1px;
-  }
-
-  .about-content p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
-
-  .about-points {
-    font-size: 0.93rem;
-  }
-
-  .tech-stack {
-    gap: 8px;
-  }
-
-  .tech-stack span {
-    font-size: 0.78rem;
-    padding: 5px 11px;
-  }
-
-  .about-image img {
-    width: 200px;
-    height: 240px;
-  }
-}
-
-/* ---------- Small phones (≤ 480px) ---------- */
-@media (max-width: 480px) {
-  .about {
-    padding: 3.5rem 5%;
-  }
-
-  .about-container {
+  .about-bio-inner {
+    flex-direction: column-reverse;
+    /* photo on top, text below */
+    align-items: center;
+    text-align: center;
     gap: 1.8rem;
+    padding: 80px 0 60px;
   }
 
-  .about-content h1 span {
-    font-size: 2rem;
-    letter-spacing: 0.8px;
+  /* Photo slides to the top */
+  .bio-image-wrap {
+    order: -1;
   }
 
-  .about-content h1::after {
-    width: 60px;
-    height: 3px;
+  .bio-text {
+    order: 1;
+    max-width: 100%;
   }
 
-  .about-content p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    margin: 0.7rem auto;
+  /* Centre the underline bar */
+  .section-heading::after {
+    margin-inline: auto;
   }
 
-  .about-points {
-    font-size: 0.9rem;
-    margin-top: 10px;
+  /* Keep bullet list left-aligned inside its centered block */
+  .bio-points {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto 1.2rem;
   }
 
-  .about-points li {
-    margin-bottom: 6px;
+  .bio-photo {
+    width: 210px;
+    height: 210px;
   }
 
-  .tech-stack {
-    gap: 7px;
-    margin-top: 14px;
+  /* Tech: 2-col grid on tablets */
+  .tech-categories {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .tech-stack span {
-    font-size: 0.75rem;
-    padding: 4px 10px;
-  }
-
-  .about-goal {
-    font-size: 0.92rem;
-    margin-top: 12px;
-  }
-
-  .about-image img {
-    width: 180px;
-    height: 215px;
+  /* Services: 2-col grid on tablets */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* ---------- Extra small phones (≤ 380px) — e.g. iPhone SE ---------- */
-@media (max-width: 380px) {
-  .about {
-    padding: 3rem 4%;
+/* ---- <= 768px  (mid tablets / large phones) ---- */
+@media (max-width: 768px) {
+  .about-bio-section {
+    padding: 0 5%;
   }
 
-  .about-content h1 span {
-    font-size: 1.75rem;
+  .about-bio-inner {
+    padding: 70px 0 50px;
+    gap: 1.5rem;
+  }
+
+  .section-sub {
+    margin-bottom: 2rem;
+  }
+
+  .bio-intro,
+  .bio-goal {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    margin: 0.9rem auto;
+  }
+
+  .bio-photo {
+    width: 190px;
+    height: 190px;
+  }
+
+  .tech-cat-card {
+    padding: 1.2rem 1.3rem;
+  }
+
+  /* Services drops to 1 col here for readability */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .service-card {
+    padding: 1.5rem 1.4rem 1.7rem;
+  }
+}
+
+/* ---- <= 600px  (standard phones) ---- */
+@media (max-width: 600px) {
+  .about-bio-section {
+    padding: 0 4.5%;
+  }
+
+  .about-bio-inner {
+    padding: 65px 0 45px;
+    gap: 1.4rem;
+  }
+
+  .bio-photo {
+    width: 165px;
+    height: 165px;
+  }
+
+  /* Tech stays 2-col at 600 — cards are wide enough */
+  .tech-categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+
+  .tech-cat-label {
+    font-size: 0.88rem;
     letter-spacing: 0.5px;
   }
 
-  .about-content p {
+  .tech-badge {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+  }
+
+  /* Services: 2 compact cols on phones */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+
+  .service-card {
+    padding: 1.2rem 1rem 1.4rem;
+  }
+
+  .service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-title {
+    font-size: 0.98rem;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+}
+
+/* ---- <= 480px  (small phones — iPhone X, Pixel 4a) ---- */
+@media (max-width: 480px) {
+  .about-bio-inner {
+    padding: 60px 0 40px;
+    gap: 1.2rem;
+  }
+
+  .section-heading::after {
+    width: 55px;
+    height: 3px;
+  }
+
+  .bio-intro,
+  .bio-goal {
+    font-size: 0.93rem;
+    margin: 0.8rem auto;
+    line-height: 1.75;
+  }
+
+  .bio-points {
+    font-size: 0.92rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .bio-points li {
+    margin-bottom: 6px;
+  }
+
+  .bio-photo {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Tech drops to 1-col — give badges proper room */
+  .tech-categories {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .tech-cat-card {
+    padding: 1rem 1.1rem;
+  }
+
+  /* Services also 1-col for clean readability */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .service-card {
+    padding: 1.2rem 1rem 1.3rem;
+  }
+
+  .service-title {
+    font-size: 1rem;
+  }
+
+  .service-desc {
     font-size: 0.88rem;
-    line-height: 1.6;
+  }
+}
+
+/* ---- <= 380px  (iPhone SE, small Androids) ---- */
+@media (max-width: 380px) {
+  .about-bio-inner {
+    padding: 55px 0 35px;
   }
 
-  .about-points {
-    font-size: 0.86rem;
+  .bio-photo {
+    width: 135px;
+    height: 135px;
   }
 
-  .tech-stack span {
+  .bio-intro,
+  .bio-goal {
+    font-size: 0.9rem;
+  }
+
+  .bio-points {
+    font-size: 0.88rem;
+  }
+
+  .tech-badge {
     font-size: 0.72rem;
     padding: 4px 9px;
   }
 
-  .about-image img {
-    width: 160px;
-    height: 190px;
+  .service-icon {
+    font-size: 1.65rem;
+  }
+
+  .service-title {
+    font-size: 0.95rem;
+  }
+
+  .service-desc {
+    font-size: 0.84rem;
   }
 }
 
-/* ---------- Tiny phones (≤ 320px) — e.g. Galaxy Fold ---------- */
+/* ---- <= 320px  (Galaxy Fold closed, very tiny phones) ---- */
 @media (max-width: 320px) {
-  .about {
-    padding: 2.5rem 3.5%;
+  .section-container {
+    padding-left: 3.5%;
+    padding-right: 3.5%;
   }
 
-  .about-content h1 span {
-    font-size: 1.55rem;
+  .bio-photo {
+    width: 120px;
+    height: 120px;
   }
 
-  .about-content p {
+  .bio-intro,
+  .bio-goal {
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .bio-points {
     font-size: 0.84rem;
-    line-height: 1.55;
   }
 
-  .about-points {
-    font-size: 0.82rem;
-  }
-
-  .tech-stack span {
+  .tech-badge {
     font-size: 0.68rem;
     padding: 3px 8px;
   }
 
-  .about-image img {
-    width: 140px;
-    height: 168px;
+  .service-card {
+    padding: 1rem 0.9rem 1.1rem;
+  }
+
+  .service-title {
+    font-size: 0.9rem;
+  }
+
+  .service-desc {
+    font-size: 0.82rem;
   }
 }
 
-/* ---------- Landscape phones (short height) ---------- */
+/* ---- Landscape phones (height <= 500px) ---- */
 @media (max-height: 500px) and (orientation: landscape) {
-  .about {
+  .about-bio-section {
     min-height: auto;
-    padding: 2.5rem 6%;
+    padding: 0 6%;
   }
 
-  .about-container {
+  /* Restore side-by-side in landscape */
+  .about-bio-inner {
     flex-direction: row;
-    align-items: center;
     text-align: left;
+    align-items: center;
     gap: 2rem;
+    padding: 35px 0;
   }
 
-  .about-content h1 span {
-    font-size: 2rem;
+  .bio-image-wrap {
+    order: 1;
   }
 
-  .about-content h1::after {
-    margin: 10px 0 0;
+  .bio-text {
+    order: 0;
   }
 
-  .about-content p {
+  /* Left-align the underline bar again */
+  .section-heading::after {
+    margin-inline: 0;
+    margin-top: 8px;
+  }
+
+  .bio-points {
+    margin: 0 0 0.8rem;
+    text-align: left;
+  }
+
+  .bio-photo {
+    width: 125px;
+    height: 125px;
+  }
+
+  .bio-intro,
+  .bio-goal {
     font-size: 0.88rem;
     margin: 0.5rem 0;
     line-height: 1.6;
   }
 
-  .about-points {
+  .bio-points {
     font-size: 0.86rem;
   }
 
-  .tech-stack {
-    justify-content: flex-start;
-    margin-top: 10px;
+  .tech-categories {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .about-image img {
-    width: 150px;
-    height: 180px;
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

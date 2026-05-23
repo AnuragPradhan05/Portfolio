@@ -1,108 +1,239 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  FaLaptopCode,
+  FaServer,
+  FaDatabase,
+  FaTools,
+  FaGlobe,
+  FaBolt,
+  FaPaintBrush,
+  FaCode,
+  FaMobileAlt,
+  FaHandshake,
+} from "react-icons/fa";
 import FloatingIcons from "/src/components/FloatingIcons";
 import "/src/styles/About.css";
 import myPic from "/src/assets/pic2.jpg";
 
+/* ─── Reusable scroll-reveal wrapper ─── */
+const Reveal = ({ children, delay = 0, direction = "up" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: direction === "up" ? 50 : direction === "down" ? -50 : 0,
+      x: direction === "left" ? 60 : direction === "right" ? -60 : 0,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      transition: { duration: 0.75, delay, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={variants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/* ─── Tech Stack Data ─── */
+const techCategories = [
+  {
+    label: "Frontend",
+    icon: <FaLaptopCode />,
+    items: ["React", "Angular", "HTML5", "CSS3", "JavaScript"],
+  },
+  {
+    label: "Backend",
+    icon: <FaServer />,
+    items: ["Spring Boot", "Java", "Python", "REST APIs"],
+  },
+  {
+    label: "Database",
+    icon: <FaDatabase />,
+    items: ["MySQL", "PostgreSQL", "Firebase"],
+  },
+  {
+    label: "Tools",
+    icon: <FaTools />,
+    items: ["Git", "GitHub", "VS Code", "Postman", "Figma"],
+  },
+];
+
+/* ─── Services Data ─── */
+const services = [
+  {
+    icon: <FaGlobe />,
+    title: "Web Development",
+    desc: "Building fast, responsive, and SEO-friendly websites using modern React & Angular frameworks with pixel-perfect UI.",
+  },
+  {
+    icon: <FaBolt />,
+    title: "Full-Stack Applications",
+    desc: "End-to-end application development with Spring Boot backends, RESTful APIs, and seamless database integrations.",
+  },
+  {
+    icon: <FaPaintBrush />,
+    title: "UI/UX Design",
+    desc: "Crafting intuitive, visually stunning interfaces with a focus on usability, micro-animations, and user experience.",
+  },
+  {
+    icon: <FaDatabase />,
+    title: "Database Design",
+    desc: "Designing efficient relational database schemas with MySQL and PostgreSQL, with Firebase for real-time applications.",
+  },
+  {
+    icon: <FaCode />,
+    title: "API Development",
+    desc: "Creating robust, secure, and well-documented REST APIs to power web and mobile applications.",
+  },
+  {
+    icon: <FaMobileAlt />,
+    title: "Responsive Design",
+    desc: "Ensuring flawless cross-device experiences from mobile to desktop with modern CSS.",
+  },
+];
+
+/* ─── Bio bullet points ─── */
+const bioBullets = [
+  { icon: <FaLaptopCode />, text: "Build full-stack apps with React, Angular & Spring Boot" },
+  { icon: <FaBolt />,       text: "Obsessed with performance, clean code & responsive UI" },
+  { icon: <FaTools />,      text: "Fast learner who thrives on real-world challenges" },
+  { icon: <FaHandshake />,  text: "Passionate about turning ideas into impactful products" },
+];
+
 const About = () => {
   return (
     <motion.section
-      className="about"
+      className="about-v2"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+      transition={{ duration: 0.8 }}
     >
-      {/* Floating background icons */}
       <FloatingIcons />
 
-      <div className="about-container">
-        {/* ---------- Left: About Text ---------- */}
-        <motion.div
-          className="about-content"
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            <span>About Me</span>
-          </motion.h1>
+      {/* ════════════════════════════════════════
+          SECTION 1 — Bio / Profile
+      ════════════════════════════════════════ */}
+      <section className="about-bio-section">
+        <div className="about-bio-inner">
+          {/* Text */}
+          <Reveal direction="right" delay={0.1}>
+            <div className="bio-text">
+              <h1 className="section-heading">
+                <span>About Me</span>
+              </h1>
 
-          {/* Intro */}
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            Hey there 👋 I'm <strong>Anurag Pradhan</strong>, a passionate Web Developer who loves building
-            clean, responsive, and user-focused digital experiences.
-          </motion.p>
+              <p className="bio-intro">
+                Hey there! I'm{" "}
+                <strong className="highlight">Anurag Pradhan</strong>, a
+                passionate{" "}
+                <strong className="highlight">Full-Stack Developer</strong>{" "}
+                who loves crafting clean, performant, and user-centred digital
+                experiences.
+              </p>
 
-          {/* What I Do */}
-          <motion.ul
-            className="about-points"
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 1 }}
-          >
-            <li>💻 Build full-stack applications using React, Angular & Spring Boot</li>
-            <li>⚡ Focus on performance, clean code & responsive UI</li>
-            <li>🚀 Fast learner who enjoys solving real-world problems</li>
-            <li>🎯 Passionate about turning ideas into working products</li>
-          </motion.ul>
+              <ul className="bio-points">
+                {bioBullets.map((b, i) => (
+                  <li key={i}>
+                    <span className="bio-bullet-icon">{b.icon}</span>
+                    {b.text}
+                  </li>
+                ))}
+              </ul>
 
-          {/* Tech Stack Badges */}
-          <motion.div
-            className="tech-stack"
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 1 }}
-          >
-            <span>React</span>
-            <span>Angular</span>
-            <span>Spring Boot</span>
-            <span>JavaScript</span>
-            <span>Java</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Firebase</span>
-            <span>PostgreSQL</span>
-            <span>Python</span>
-            <span>MySQL</span>
+              <p className="bio-goal">
+                Currently seeking opportunities as a{" "}
+                <strong className="highlight">Software / Web Developer</strong>{" "}
+                to contribute, grow, and build things that matter.
+              </p>
+            </div>
+          </Reveal>
 
-          </motion.div>
+          {/* Photo */}
+          <Reveal direction="left" delay={0.25}>
+            <div className="bio-image-wrap">
+              <div className="bio-image-glow" />
+              <img src={myPic} alt="Anurag Pradhan" className="bio-photo" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-          {/* Goal */}
-          <motion.p
-            className="about-goal"
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 1 }}
-          >
-            Currently seeking opportunities as a <strong>Software / Web Developer</strong>
-            to contribute, grow, and build impactful digital solutions.
-          </motion.p>
-        </motion.div>
+      {/* ════════════════════════════════════════
+          SECTION 2 — Tech Stack
+      ════════════════════════════════════════ */}
+      <section className="about-tech-section">
+        <div className="section-container">
+          <Reveal direction="up" delay={0}>
+            <h2 className="section-heading center">
+              <span>Tech Stack</span>
+            </h2>
+            <p className="section-sub">
+              Technologies I work with on a daily basis
+            </p>
+          </Reveal>
 
-        {/* ---------- Right: Image ---------- */}
-        <motion.div
-          className="about-image"
-          initial={{ opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          whileHover={{ scale: 1.05, rotate: 1 }}
-        >
-          <motion.img
-            src={myPic}
-            alt="Anurag Pradhan"
-            transition={{ duration: 0.4 }}
-          />
-        </motion.div>
-      </div>
+          <div className="tech-categories">
+            {techCategories.map((cat, i) => (
+              <Reveal key={cat.label} direction="up" delay={i * 0.1}>
+                <div className="tech-cat-card">
+                  <div className="tech-cat-header">
+                    <span className="tech-cat-icon">{cat.icon}</span>
+                    <span className="tech-cat-label">{cat.label}</span>
+                  </div>
+                  <div className="tech-badges">
+                    {cat.items.map((item) => (
+                      <span key={item} className="tech-badge">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          SECTION 3 — Services
+      ════════════════════════════════════════ */}
+      <section className="about-services-section">
+        <div className="section-container">
+          <Reveal direction="up" delay={0}>
+            <h2 className="section-heading center">
+              <span>Services</span>
+            </h2>
+            <p className="section-sub">What I can do for you</p>
+          </Reveal>
+
+          <div className="services-grid">
+            {services.map((srv, i) => (
+              <Reveal key={srv.title} direction="up" delay={i * 0.08}>
+                <div className="service-card">
+                  <div className="service-icon">{srv.icon}</div>
+                  <h3 className="service-title">{srv.title}</h3>
+                  <p className="service-desc">{srv.desc}</p>
+                  <div className="service-shine" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
     </motion.section>
   );
 };

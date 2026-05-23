@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap');
 
 /* ================= Page ================= */
 .projects-page {
@@ -12,7 +12,7 @@
 .projects-title {
   display: block;
   width: fit-content;
-  margin: 8% auto clamp(35px, 5vw, 60px) auto;
+  margin: 2% auto clamp(35px, 5vw, 60px) auto;
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
@@ -49,12 +49,281 @@
   transform: scale(1.02);
 }
 
-/* ================= Grid ================= */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(18px, 2.5vw, 30px);
-  align-items: stretch;
+/* =========================================
+   STACKING PROJECTS
+========================================= */
+
+.stack-projects {
+  position: relative;
+  width: 100%;
+  padding-bottom: 20px;
+  margin-top: -20px; /* moves whole stack upward */
+}
+
+/* Each card section */
+.stack-card-wrapper {
+  position: sticky;
+  top: 6vh; /* moved upward from 10vh */
+  height: 88vh;
+  display: flex;
+  align-items: flex-start; /* start higher */
+  justify-content: center;
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+
+/* Bigger premium card */
+.stack-card-wrapper .project-card {
+  width: min(100%, 980px);
+  height: 76vh;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Hover lift */
+.stack-card-wrapper .project-card:hover {
+  transform: translateY(-8px) scale(1.01);
+}
+
+/* Make image larger */
+.stack-card-wrapper .project-img {
+  height: 320px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 140, 0, 0.15);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.45),
+    0 0 25px rgba(255,140,0,0.08);
+}
+
+/* =========================================
+   PREMIUM GLASS CARD EFFECT
+========================================= */
+
+.stack-card-wrapper .project-front,
+.stack-card-wrapper .project-back {
+  border-radius: 26px;
+  padding: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  /* brighter glass */
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 30, 30, 0.88),
+      rgba(12, 12, 12, 0.82)
+    );
+
+  /* stronger border */
+  border: 1px solid rgba(255, 140, 0, 0.22);
+
+  /* MUCH better visibility */
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.75),
+    0 10px 25px rgba(255,140,0,0.08),
+    0 0 0 1px rgba(255,255,255,0.03),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  overflow: hidden;
+  position: relative;
+}
+
+/* subtle glow overlay */
+.stack-card-wrapper .project-front::before,
+.stack-card-wrapper .project-back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,140,0,0.14),
+      transparent 40%
+    );
+
+  pointer-events: none;
+}
+
+/* stronger hover visibility */
+.stack-card-wrapper .project-front:hover,
+.stack-card-wrapper .project-back:hover {
+  border-color: rgba(255, 140, 0, 0.38);
+
+  box-shadow:
+    0 35px 75px rgba(0,0,0,0.82),
+    0 0 35px rgba(255,140,0,0.12),
+    0 0 0 1px rgba(255,140,0,0.18);
+}
+/* ================= Scroll Indicator ================= */
+.scroll-indicator {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #ff8c00;
+  z-index: 50;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(8px);
+  padding: 10px 6px;
+  border-radius: 999px;
+
+  background: rgba(10,10,10,0.18);
+
+  border: 1px solid rgba(255,140,0,0.08);
+}
+
+.scroll-indicator span {
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+.scroll-indicator svg {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.5));
+}
+
+/* ============================================================
+   PREMIUM MOBILE SCROLL INDICATOR
+============================================================ */
+
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+
+  .scroll-indicator {
+    right: 22px;
+    bottom: 28px;
+    gap: 10px;
+    opacity: 0.9;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.62rem;
+    letter-spacing: 1.8px;
+  }
+
+  .scroll-indicator svg {
+    font-size: 1.2rem;
+  }
+}
+
+/* ---------- Large Phones ---------- */
+@media (max-width: 768px) {
+
+  .scroll-indicator {
+    right: 16px;
+    bottom: 22px;
+    gap: 8px;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.56rem;
+    letter-spacing: 1.5px;
+
+    text-shadow:
+      0 0 8px rgba(255,140,0,0.35);
+  }
+
+  .scroll-indicator svg {
+    font-size: 1.05rem;
+
+    filter:
+      drop-shadow(0 0 6px rgba(255,140,0,0.45));
+  }
+}
+
+/* ---------- Standard Phones ---------- */
+@media (max-width: 600px) {
+
+  .scroll-indicator {
+    right: 12px;
+    bottom: 18px;
+
+    gap: 6px;
+
+    opacity: 0.82;
+
+    transform: scale(0.9);
+  }
+
+  .scroll-indicator span {
+    font-size: 0.5rem;
+    letter-spacing: 1.2px;
+  }
+
+  .scroll-indicator svg {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- Small Phones ---------- */
+@media (max-width: 480px) {
+
+  .scroll-indicator {
+    right: 8px;
+    bottom: 14px;
+
+    transform: scale(0.82);
+
+    opacity: 0.75;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.45rem;
+    letter-spacing: 1px;
+  }
+
+  .scroll-indicator svg {
+    font-size: 0.82rem;
+  }
+}
+
+/* ---------- iPhone SE ---------- */
+@media (max-width: 380px) {
+
+  .scroll-indicator {
+    right: 5px;
+    bottom: 10px;
+
+    transform: scale(0.72);
+
+    opacity: 0.65;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.4rem;
+  }
+
+  .scroll-indicator svg {
+    font-size: 0.72rem;
+  }
+}
+
+/* ---------- Galaxy Fold ---------- */
+@media (max-width: 320px) {
+
+  .scroll-indicator {
+    transform: scale(0.65);
+    right: 2px;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.36rem;
+  }
 }
 
 /* ================= Certificates Title ================= */
@@ -192,19 +461,42 @@
 }
 
 /* ============================================================
-   RESPONSIVE — ALL MOBILE VIEWS
+   RESPONSIVE — STACK PROJECTS MOBILE FIX
    ============================================================ */
 
-/* ---------- Tablet (≤ 900px) ---------- */
+/* ---------- Tablet ---------- */
 @media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(16px, 2.8vw, 26px);
+
+  .projects-page {
+    padding: 70px 5%;
   }
 
   .projects-title {
     font-size: 2.5rem;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
+  }
+
+  .stack-projects {
+    margin-top: 30px;
+  }
+
+  .stack-card-wrapper {
+    height: 85vh;
+    margin-bottom: 20px;
+  }
+
+  .stack-card-wrapper .project-card {
+    width: 95%;
+    height: 500px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 20px;
+  }
+
+  .project-img {
+    height: 240px;
   }
 
   .certificates-title {
@@ -219,19 +511,20 @@
 
   .cert-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 }
 
-/* ---------- Large phones (≤ 768px) ---------- */
+/* ---------- Large Phones ---------- */
 @media (max-width: 768px) {
+
   .projects-page {
-    padding: clamp(40px, 5vw, 65px) clamp(14px, 5%, 5%);
+    padding: 60px 4%;
   }
 
   .projects-title {
-    font-size: 2.2rem;
-    letter-spacing: 1.2px;
-    margin-top: 10%;
+    font-size: 2.1rem;
+    margin-top: 12%;
   }
 
   .projects-title::after {
@@ -239,56 +532,143 @@
     height: 3px;
   }
 
-  .projects-grid {
-    gap: clamp(14px, 2.5vw, 22px);
+  .stack-card-wrapper {
+    height: 85vh;
+    margin-bottom: 20px;
+  }
+
+  .scroll-indicator {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .stack-card-wrapper .project-card {
+    width: 100%;
+    height: 460px;
+    border-radius: 20px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 18px;
+  }
+
+  .project-img {
+    height: 210px;
+    border-radius: 12px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-front p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .tech-stack span {
+    font-size: 0.72rem;
+  }
+
+  .project-link {
+    font-size: 0.85rem;
   }
 
   .certificates-title {
     font-size: 22px;
     gap: 12px;
-    margin-top: 40px;
-    margin-bottom: 16px;
   }
 
   .cert-line {
     width: 38px;
   }
 
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
   .cert-img {
-    height: clamp(130px, 20vw, 165px);
+    height: 170px;
   }
 
   .cert-popup-container {
-    width: min(95%, 500px);
+    width: 95%;
   }
 }
 
-/* ---------- Standard phones (≤ 600px) ---------- */
+/* ---------- Standard Phones ---------- */
 @media (max-width: 600px) {
+
   .projects-page {
-    padding: 45px 4% 50px;
+    padding: 50px 4%;
   }
 
   .projects-title {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
+    margin-top: 16%;
     letter-spacing: 1px;
-    margin-top: 12%;
   }
 
   .projects-title::after {
     width: 55px;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .stack-card-wrapper {
+    height: 78vh;
+    margin-bottom: 20px;
+  }
+
+
+  .stack-card-wrapper .project-card {
+    height: 430px;
+    border-radius: 18px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 15px;
+  }
+
+  .project-img {
+    height: 190px;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 1rem;
+  }
+
+  .project-front p {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .tech-stack {
+    gap: 5px;
+  }
+
+  .tech-stack span {
+    font-size: 0.66rem;
+    padding: 3px 8px;
+  }
+
+  .flip-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .project-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.82rem;
   }
 
   .certificates-title {
     font-size: 20px;
     gap: 10px;
-    margin-top: 35px;
-    letter-spacing: 0.5px;
+    margin-top: 30px;
   }
 
   .cert-line {
@@ -297,21 +677,7 @@
 
   .cert-grid {
     grid-template-columns: 1fr;
-  }
-
-  .cert-img {
-    height: clamp(130px, 40vw, 160px);
-  }
-
-  .cert-popup-container {
-    width: 95%;
-    padding: 10px;
-  }
-
-  /* Modal slides from bottom on mobile */
-  .cert-modal {
-    align-items: flex-end;
-    padding: 0;
+    gap: 16px;
   }
 
   .cert-popup-container {
@@ -319,30 +685,69 @@
     border-radius: 16px 16px 0 0;
     max-height: 88vh;
   }
+
+  .cert-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
 }
 
-/* ---------- Small phones (≤ 480px) ---------- */
+/* ---------- Small Phones ---------- */
 @media (max-width: 480px) {
+
   .projects-page {
-    padding: 40px 4% 45px;
+    padding: 40px 4%;
   }
 
   .projects-title {
-    font-size: 1.7rem;
-    letter-spacing: 0.8px;
+    font-size: 1.6rem;
+    margin-top: 20%;
   }
 
   .projects-title::after {
-    width: 50px;
-    height: 3px;
-    margin-top: 10px;
+    width: 48px;
+  }
+
+  .stack-card-wrapper {
+    height: 72vh;
+    margin-bottom: 20px;
+  }
+
+  .stack-card-wrapper .project-card {
+    height: 400px;
+    border-radius: 16px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 13px;
+  }
+
+  .project-img {
+    height: 170px;
+    border-radius: 10px;
+  }
+
+  .project-front p {
+    font-size: 0.82rem;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 0.95rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.62rem;
+  }
+
+  .flip-btn {
+    width: 28px;
+    height: 28px;
   }
 
   .certificates-title {
     font-size: 18px;
-    gap: 9px;
-    margin-top: 30px;
-    margin-bottom: 14px;
   }
 
   .cert-line {
@@ -350,168 +755,135 @@
   }
 
   .cert-card {
+    padding: 12px;
     border-radius: 12px;
   }
 
   .cert-img {
-    height: 135px;
+    height: 140px;
   }
 
   .cert-btn {
     font-size: 0.8rem;
-    padding: 6px 12px;
-  }
-
-  .cert-popup-container {
-    max-height: 85vh;
-    padding: 10px;
-  }
-
-  .cert-close {
-    width: 32px;
-    height: 32px;
   }
 }
 
-/* ---------- Extra small phones (≤ 380px) — iPhone SE ---------- */
+/* ---------- iPhone SE ---------- */
 @media (max-width: 380px) {
+
   .projects-page {
-    padding: 35px 3.5% 40px;
+    padding: 35px 3.5%;
   }
 
   .projects-title {
-    font-size: 1.5rem;
-    letter-spacing: 0.5px;
+    font-size: 1.4rem;
   }
 
-  .projects-title::after {
-    width: 44px;
-    height: 3px;
+  .stack-card-wrapper {
+    height: 68vh;
   }
 
-  .projects-grid {
-    gap: 16px;
+  .stack-card-wrapper .project-card {
+    height: 380px;
+  }
+
+  .project-img {
+    height: 155px;
+  }
+
+  .project-front,
+  .project-back {
+    padding: 11px;
+  }
+
+  .project-front p {
+    font-size: 0.78rem;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 0.9rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.58rem;
   }
 
   .certificates-title {
+    margin-top: 100px;
     font-size: 16px;
-    gap: 8px;
-    margin-top: 25px;
-    margin-bottom: 12px;
-  }
-
-  .cert-line {
-    width: 22px;
-  }
-
-  .cert-card {
-    border-radius: 10px;
-    padding: 10px;
   }
 
   .cert-img {
     height: 125px;
-    border-radius: 6px;
   }
 
   .cert-card h3 {
-    font-size: 0.88rem;
-    margin-bottom: 8px;
-  }
-
-  .cert-btn {
-    font-size: 0.76rem;
-    padding: 5px 11px;
-  }
-
-  .cert-popup-container {
-    padding: 8px;
-    max-height: 82vh;
+    font-size: 0.85rem;
   }
 }
 
-/* ---------- Tiny phones (≤ 320px) — Galaxy Fold ---------- */
+/* ---------- Galaxy Fold ---------- */
 @media (max-width: 320px) {
-  .projects-page {
-    padding: 30px 3% 35px;
-  }
 
   .projects-title {
-    font-size: 1.3rem;
-    letter-spacing: 0.3px;
+    font-size: 1.2rem;
   }
 
-  .projects-title::after {
-    width: 38px;
-    height: 2px;
+  .stack-card-wrapper {
+    height: 64vh;
   }
 
-  .projects-grid {
-    gap: 14px;
+  .stack-card-wrapper .project-card {
+    height: 350px;
+  }
+
+  .project-img {
+    height: 135px;
+  }
+
+  .project-front p {
+    font-size: 0.74rem;
+  }
+
+  .project-front h3,
+  .project-back h3 {
+    font-size: 0.82rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.54rem;
+  }
+
+  .flip-btn {
+    width: 24px;
+    height: 24px;
   }
 
   .certificates-title {
     font-size: 14px;
-    gap: 6px;
-    margin-top: 22px;
-  }
-
-  .cert-line {
-    width: 18px;
-  }
-
-  .cert-card {
-    padding: 9px;
-    border-radius: 9px;
   }
 
   .cert-img {
-    height: 115px;
-    border-radius: 5px;
-    margin-bottom: 8px;
-  }
-
-  .cert-card h3 {
-    font-size: 0.82rem;
-  }
-
-  .cert-btn {
-    font-size: 0.72rem;
-    padding: 5px 9px;
-  }
-
-  .cert-popup-container {
-    padding: 7px;
-    max-height: 80vh;
-  }
-
-  .cert-close {
-    width: 26px;
-    height: 26px;
-    font-size: 12px;
+    height: 110px;
   }
 }
 
-/* ---------- Landscape phones (height ≤ 500px) ---------- */
+/* ---------- Landscape Phones ---------- */
 @media (max-height: 500px) and (orientation: landscape) {
-  .projects-page {
-    padding: 25px 5% 35px;
+
+  .stack-card-wrapper {
+    height: 120vh;
+    top: 15px;
   }
 
-  .projects-title {
-    font-size: 1.7rem;
-    margin-top: 4%;
-    margin-bottom: 20px;
+  .stack-card-wrapper .project-card {
+    height: 320px;
+    width: 85%;
   }
 
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .certificates-title {
-    font-size: 18px;
-    margin-top: 25px;
+  .project-img {
+    height: 120px;
   }
 
   .cert-grid {
@@ -520,17 +892,5 @@
 
   .cert-img {
     height: 120px;
-  }
-
-  /* Full-screen modal in landscape */
-  .cert-modal {
-    align-items: center;
-    padding: 12px;
-  }
-
-  .cert-popup-container {
-    width: min(85%, 520px);
-    max-height: 90vh;
-    border-radius: 12px;
   }
 }

@@ -8,20 +8,70 @@ import {
 } from "react-icons/fa";
 
 const ProjectCard = ({ title, description, tech, github, live, image }) => {
-  const [flipped, setFlipped] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
 
   const isSmartBiz = title === "SmartBiz App";
 
   return (
     <>
-      <div className={`project-card ${flipped ? "flipped" : ""}`}>
+      <div className="project-card">
         <div className="project-inner">
-          {/* ================= FRONT ================= */}
           <div className="project-front">
 
             {image && (
-              <img src={image} alt={title} className="project-img" />
+              <div className="project-img-wrapper">
+                <img src={image} alt={title} className="project-img" />
+                
+                {/* Overlay Links on Top */}
+                <div className="project-links-overlay">
+                  {github &&
+                    (Array.isArray(github) ? (
+                      github.map((repo, i) => (
+                        <a
+                          key={i}
+                          className="overlay-link"
+                          href={repo.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          title={repo.name || `Repo ${i + 1}`}
+                        >
+                          <FaGithub />
+                        </a>
+                      ))
+                    ) : (
+                      <a
+                        className="overlay-link"
+                        href={github}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="GitHub Repo"
+                      >
+                        <FaGithub />
+                      </a>
+                    ))}
+
+                  {live && (
+                    <a
+                      className="overlay-link demo-link"
+                      href={live}
+                      target="_blank"
+                      rel="noreferrer"
+                      title="Live Site"
+                    >
+                      <FaExternalLinkAlt /> Live
+                    </a>
+                  )}
+
+                  {isSmartBiz && (
+                    <button
+                      className="overlay-link demo-btn"
+                      onClick={() => setShowDemo(true)}
+                    >
+                      Demo Access
+                    </button>
+                  )}
+                </div>
+              </div>
             )}
 
             <h3>{title}</h3>
@@ -33,65 +83,6 @@ const ProjectCard = ({ title, description, tech, github, live, image }) => {
               ))}
             </div>
 
-            <button className="flip-btn" onClick={() => setFlipped(true)}>
-              <FaArrowRight />
-            </button>
-          </div>
-
-          {/* ================= BACK ================= */}
-          <div className="project-back">
-            <h3>{title}</h3>
-
-            {/* ================= GitHub Links ================= */}
-            {github &&
-              (Array.isArray(github) ? (
-                github.map((repo, i) => (
-                  <a
-                    key={i}
-                    className="project-link"
-                    href={repo.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <FaGithub /> {repo.name || `Repo ${i + 1}`}
-                  </a>
-                ))
-              ) : (
-                <a
-                  className="project-link"
-                  href={github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FaGithub /> GitHub
-                </a>
-              ))}
-
-            {/* ================= Live Site ================= */}
-            {live && (
-              <a
-                className="project-link"
-                href={live}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FaExternalLinkAlt /> Live Site
-              </a>
-            )}
-
-            {/* ================= Demo Access ONLY SmartBiz ================= */}
-            {isSmartBiz && (
-              <button
-                className="demo-btn"
-                onClick={() => setShowDemo(true)}
-              >
-                Demo Access
-              </button>
-            )}
-
-            <button className="flip-btn" onClick={() => setFlipped(false)}>
-              <FaArrowRight style={{ transform: "rotate(180deg)" }} />
-            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Projects.css";
 import { motion } from "framer-motion";
 import ProjectCard from "../components/ProjectCard";
@@ -8,13 +8,14 @@ import jrtransportImg from "/src/assets/JrTransport.png";
 import snakeImg from "/src/assets/SnakeGame.jpg";
 import pythonImg from "/src/assets/PP.jpg";
 import bloomifyImg from "/src/assets/bloomify.png"
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaChevronDown } from "react-icons/fa";
 
 import cert2 from "/src/assets/certificate/certificate1.jpg";
 import cert1 from "/src/assets/certificate/certificate2.jpg";
 
 const Projects = () => {
   const [activeCert, setActiveCert] = useState(null);
+  const [showScroll, setShowScroll] = useState(true);
 
     const projects = [
       {
@@ -79,6 +80,21 @@ const Projects = () => {
     },
   ];
 
+  useEffect(() => 
+    {
+      const handleScroll = () => {
+        if (window.scrollY > 40) {
+          setShowScroll(false);
+        } else {
+          setShowScroll(true);
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
   return (
     <motion.section
       className="projects-page"
@@ -92,14 +108,16 @@ const Projects = () => {
       {/* ================= Projects ================= */}
       <h1 className="projects-title">My Projects</h1>
 
-      <div className="projects-grid">
+      <div className="stack-projects">
         {projects.map((p, i) => (
           <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: i * 0.12 }}
-            viewport={{ once: true }}
+              key={i}
+              className="stack-card-wrapper"
+              style={{ top: `max(70px, calc(10vh + ${i * 20}px))` }}
+              initial={{ opacity: 0, y: 80, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ margin: "-100px", once: true }}
           >
           <ProjectCard
             title={p.title}
@@ -174,6 +192,29 @@ const Projects = () => {
           </motion.div>
         </div>
       )}
+
+      {/* ================= Scroll Indicator ================= */}
+        {showScroll && (
+          <motion.div
+            className="scroll-indicator"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1, y: [0, 12, 0] }}
+            exit={{ opacity: 0 }}
+            transition={{
+              y: {
+                repeat: Infinity,
+                duration: 1.5,
+                ease: "easeInOut",
+              },
+              opacity: {
+                duration: 0.3,
+              },
+            }}
+          >
+            <span>SCROLL</span>
+            <FaChevronDown />
+          </motion.div>
+        )}
     </motion.section>
   );
 };

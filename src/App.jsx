@@ -22,6 +22,11 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Show loader first
   if (loading) {
     return <Loader />;

@@ -1,48 +1,59 @@
 .floating-icons {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  overflow: hidden;
-  z-index: 0;
+  z-index: 2;               /* above section backgrounds */
   pointer-events: none;
+  overflow: hidden;
 }
 
 .floating-icons .icon {
   position: absolute;
-  font-size: 2.5rem;
-  opacity: 0.15;
+  font-size: 3rem;
+  opacity: 0.35;            /* was 0.15 — now clearly visible */
+  filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.55));
   animation: floatGlow 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.5));
 }
 
-/* Random positions for desktop */
-.icon.react { top: 15%; left: 15%; color: #61dafb; }
-.icon.html { top: 20%; right: 20%; color: #ff4500; }
-.icon.css { bottom: 25%; left: 10%; color: #007bff; }
-.icon.js { bottom: 15%; right: 25%; color: #f7df1e; }
-.icon.node { top: 40%; right: 10%; color: #68a063; }
-.icon.github { bottom: 10%; left: 40%; color: #fff; }
+/* Individual icon positions & colours */
+.icon.react  { top: 12%;  left: 8%;   color: #61dafb; }
+.icon.html   { top: 18%;  right: 12%; color: #ff4500; }
+.icon.css    { bottom: 22%; left: 8%;  color: #2965f1; }
+.icon.js     { bottom: 14%; right: 18%; color: #f7df1e; }
+.icon.node   { top: 42%;  right: 7%;  color: #68a063; }
+.icon.github { bottom: 8%; left: 42%; color: #e0e0e0; }
 
 @keyframes floatGlow {
-  0%, 100% { transform: translateY(0); opacity: 0.12; }
-  50% { transform: translateY(-15px); opacity: 0.25; }
+  0%,  100% { transform: translateY(0px);   opacity: 0.28; }
+  50%       { transform: translateY(-18px); opacity: 0.45; }
 }
 
-/* Responsive */
+/* ── Tablet ── */
 @media (max-width: 1024px) {
-  .floating-icons .icon { font-size: 2rem; opacity: 0.12; }
+  .floating-icons .icon { font-size: 2.5rem; opacity: 0.3; }
 }
 
+/* ── Large phones ── */
 @media (max-width: 768px) {
-  .floating-icons .icon { font-size: 1.6rem; opacity: 0.1; animation-duration: 7s; }
-  .icon.react { top: 15%; left: 10%; }
-  .icon.html { top: 15%; right: 10%; }
-  .icon.css { bottom: 20%; left: 5%; }
-  .icon.js { bottom: 10%; right: 15%; }
-  .icon.node { top: 35%; right: 5%; }
-  .icon.github { bottom: 5%; left: 35%; }
+  .floating-icons .icon {
+    font-size: 2rem;
+    opacity: 0.28;
+    animation-duration: 7s;
+  }
+  .icon.react  { top: 10%; left: 6%;   }
+  .icon.html   { top: 10%; right: 8%;  }
+  .icon.css    { bottom: 18%; left: 4%; }
+  .icon.js     { bottom: 8%;  right: 10%; }
+  .icon.node   { top: 38%;  right: 4%; }
+  .icon.github { bottom: 4%; left: 38%; }
 }
 
+/* ── Small phones ── */
 @media (max-width: 480px) {
-  .floating-icons .icon { font-size: 1.2rem; opacity: 0.08; animation-duration: 8s; }
-  .icon.github, .icon.node { display: none; }
+  .floating-icons .icon {
+    font-size: 1.7rem;
+    opacity: 0.22;
+    animation-duration: 8s;
+  }
+  /* hide two icons to reduce clutter on tiny screens */
+  .icon.node, .icon.github { display: none; }
 }
