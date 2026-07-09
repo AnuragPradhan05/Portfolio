@@ -28,8 +28,8 @@ const Projects = () => {
       },
       {
         title: "Patient History Management API",
-        desc: "A secure RESTful API for managing patient records and medical history with CRUD operations, validation, and a scalable Spring Boot architecture.",
-        tech: ["Spring Boot", "Java", "MySQL", "REST API"],
+        desc: "A secure RESTful API for managing patient records and medical history with CRUD operations, validation, and a scalable Fast API architecture.",
+        tech: ["Fast API", "Python", "SQLite", "REST API"],
         github: "https://github.com/AnuragPradhan05/patient-history-management-api",
         live: "",
         image: patientHistoryImg,

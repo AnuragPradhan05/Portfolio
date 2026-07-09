@@ -59,12 +59,12 @@ const techCategories = [
   {
     label: "Backend",
     icon: <FaServer />,
-    items: ["Spring Boot", "Java", "Python", "REST APIs"],
+    items: ["Spring Boot", "Java", "Python","Fast API", "REST APIs"],
   },
   {
     label: "Database",
     icon: <FaDatabase />,
-    items: ["MySQL", "PostgreSQL", "Firebase"],
+    items: ["MySQL", "PostgreSQL", "Firebase Firestore", "SQLite"],
   },
   {
     label: "Tools",
