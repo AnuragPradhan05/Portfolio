@@ -7,6 +7,7 @@ import {
   FaLinkedin,
   FaGithub,
 } from "react-icons/fa";
+import ScrollIndicator from "../components/ScrollIndicator";
 
 import FloatingIcons from "/src/components/FloatingIcons";
 import "/src/styles/Contact.css";
@@ -284,6 +285,8 @@ const Contact = () => {
         </footer>
 
       </div>
+
+      <ScrollIndicator />
     </motion.section>
   );
 };

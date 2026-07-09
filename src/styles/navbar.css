@@ -233,3 +233,104 @@
 .ap-tab svg{
   font-size: 18px;
 }
+
+
+/* ==========================================
+   APPLE FULL WIDTH DESKTOP NAV
+========================================== */
+
+.desktop-nav {
+  position: fixed;
+  top: 18px;
+  left: 150px;
+  right: 150px;
+
+  height: 58px;          /* Reduced from 70px */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;             /* Increased spacing */
+
+  z-index: 3000;
+
+  border-radius: 20px;
+
+  background: rgba(20,20,20,.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 8px 28px rgba(0,0,0,.35),
+    inset 0 1px rgba(255,255,255,.05);
+}
+
+.desktop-nav-item {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #d8d8d8;
+  text-decoration: none;
+
+  border-radius: 14px;
+
+  transition: all .3s ease;
+}
+
+.desktop-nav-item svg {
+  font-size: 20px;
+}
+
+.desktop-nav-item:hover {
+  background: rgba(255,140,0,.12);
+  color: #ff9f1c;
+  transform: translateY(-2px) scale(1.08);
+}
+
+.desktop-nav-item.active {
+  background: rgba(255,140,0,.16);
+  color: #ff9f1c;
+}
+
+/* Tooltip */
+
+.desktop-tooltip {
+  position: absolute;
+
+  top: 58px;
+
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+
+  white-space: nowrap;
+
+  padding: 6px 12px;
+  border-radius: 10px;
+
+  font-size: .8rem;
+
+  color: white;
+
+  background: rgba(20,20,20,.95);
+  backdrop-filter: blur(10px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: .25s;
+}
+
+.desktop-nav-item:hover .desktop-tooltip{
+
+  opacity:1;
+
+  transform:translateX(-50%) translateY(0);
+}

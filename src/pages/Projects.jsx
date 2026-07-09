@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/Projects.css";
 import { motion } from "framer-motion";
 import ProjectCard from "../components/ProjectCard";
 import FloatingIcons from "/src/components/FloatingIcons";
-import smartbizImg from "/src/assets/smartbiz.jpg";
+import patientHistoryImg from "/src/assets/patientHistory.png";
 import jrtransportImg from "/src/assets/JrTransport.png";
 import snakeImg from "/src/assets/SnakeGame.jpg";
 import pythonImg from "/src/assets/PP.jpg";
 import bloomifyImg from "/src/assets/bloomify.png"
-import { FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import ScrollIndicator from "../components/ScrollIndicator";
 
 import cert2 from "/src/assets/certificate/certificate1.jpg";
 import cert1 from "/src/assets/certificate/certificate2.jpg";
 
 const Projects = () => {
   const [activeCert, setActiveCert] = useState(null);
-  const [showScroll, setShowScroll] = useState(true);
 
     const projects = [
       {
@@ -27,12 +27,12 @@ const Projects = () => {
         image: bloomifyImg,
       },
       {
-        title: "SmartBiz App",
-        desc: "A modern business management platform.",
-        tech: ["Angular", "TypeScript"],
-        github: "https://github.com/AnuragPradhan05/smartbiz",
-        live: "https://smartbiz-zhej.onrender.com/",
-        image: smartbizImg,
+        title: "Patient History Management API",
+        desc: "A secure RESTful API for managing patient records and medical history with CRUD operations, validation, and a scalable Spring Boot architecture.",
+        tech: ["Spring Boot", "Java", "MySQL", "REST API"],
+        github: "https://github.com/AnuragPradhan05/patient-history-management-api",
+        live: "",
+        image: patientHistoryImg,
       },
       {
         title: "JR Transport",
@@ -80,20 +80,6 @@ const Projects = () => {
     },
   ];
 
-  useEffect(() => 
-    {
-      const handleScroll = () => {
-        if (window.scrollY > 40) {
-          setShowScroll(false);
-        } else {
-          setShowScroll(true);
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
   return (
     <motion.section
@@ -193,28 +179,7 @@ const Projects = () => {
         </div>
       )}
 
-      {/* ================= Scroll Indicator ================= */}
-        {showScroll && (
-          <motion.div
-            className="scroll-indicator"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1, y: [0, 12, 0] }}
-            exit={{ opacity: 0 }}
-            transition={{
-              y: {
-                repeat: Infinity,
-                duration: 1.5,
-                ease: "easeInOut",
-              },
-              opacity: {
-                duration: 0.3,
-              },
-            }}
-          >
-            <span>SCROLL</span>
-            <FaChevronDown />
-          </motion.div>
-        )}
+      <ScrollIndicator />
     </motion.section>
   );
 };

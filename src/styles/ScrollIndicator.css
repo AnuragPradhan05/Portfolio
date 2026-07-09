@@ -1,0 +1,160 @@
+.global-scroll-indicator {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  z-index: 999;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  height: auto;
+
+  pointer-events: none;
+  user-select: none;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.global-scroll-indicator span {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,.8);
+}
+
+.global-scroll-indicator svg {
+  font-size: 18px;
+  color: #ff9800;
+  filter: drop-shadow(0 0 8px rgba(255, 159, 28, 0.5));
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE SCROLL INDICATOR
+============================================================ */
+
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+  .global-scroll-indicator {
+    bottom: 28px;
+    gap: 8px;
+    transform: translateX(-50%) scale(0.95);
+    opacity: 0.9;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 1.1rem;
+  }
+}
+
+/* ---------- Large Phones ---------- */
+@media (max-width: 768px) {
+  .global-scroll-indicator {
+    bottom: 24px;
+    gap: 7px;
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.85;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.56rem;
+    letter-spacing: 1.8px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 1rem;
+  }
+}
+
+/* ---------- Standard Phones ---------- */
+@media (max-width: 600px) {
+  .global-scroll-indicator {
+    bottom: 20px;
+    gap: 6px;
+    transform: translateX(-50%) scale(0.82);
+    opacity: 0.8;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.5rem;
+    letter-spacing: 1.5px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- Small Phones ---------- */
+@media (max-width: 480px) {
+  .global-scroll-indicator {
+    bottom: 16px;
+    gap: 5px;
+    transform: translateX(-50%) scale(0.75);
+    opacity: 0.75;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.45rem;
+    letter-spacing: 1.2px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- iPhone SE ---------- */
+@media (max-width: 380px) {
+  .global-scroll-indicator {
+    bottom: 12px;
+    gap: 4px;
+    transform: translateX(-50%) scale(0.68);
+    opacity: 0.65;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.4rem;
+    letter-spacing: 1px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 0.72rem;
+  }
+}
+
+/* ---------- Galaxy Fold ---------- */
+@media (max-width: 320px) {
+  .global-scroll-indicator {
+    bottom: 10px;
+    gap: 3px;
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0.6;
+  }
+
+  .global-scroll-indicator span {
+    font-size: 0.35rem;
+    letter-spacing: 0.8px;
+  }
+
+  .global-scroll-indicator svg {
+    font-size: 0.65rem;
+  }
+}

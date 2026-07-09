@@ -15,6 +15,8 @@ import {
 import FloatingIcons from "/src/components/FloatingIcons";
 import "/src/styles/About.css";
 import myPic from "/src/assets/pic2.jpg";
+import ScrollIndicator from "/src/components/ScrollIndicator";
+
 
 /* ─── Reusable scroll-reveal wrapper ─── */
 const Reveal = ({ children, delay = 0, direction = "up" }) => {
@@ -234,6 +236,9 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      
+      <ScrollIndicator />
     </motion.section>
   );
 };

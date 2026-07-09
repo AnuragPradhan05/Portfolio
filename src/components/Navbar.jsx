@@ -7,21 +7,23 @@ import "/src/styles/navbar.css";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showNav, setShowNav] = useState(true);
 
   const location = useLocation();
   const wrapperRef = useRef();
 
-  // Detect screen resize
+  /* ---------------- Screen Resize ---------------- */
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Close when clicking outside
+  /* ---------------- Close Mobile Menu ---------------- */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -30,60 +32,135 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  /* ---------------- Hide Navbar on Scroll Down ---------------- */
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show near top
+      if (currentScrollY <= 20) {
+        setShowNav(true);
+      } else {
+        // Show when scrolling up
+        if (currentScrollY < lastScrollY) {
+          setShowNav(true);
+        }
+        // Hide when scrolling down
+        else {
+          setShowNav(false);
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { path: "/", icon: <FaHome />, label: "Home" },
-    { path: "/about", icon: <FaUser />, label: "About" },
-    { path: "/projects", icon: <FaCode />, label: "Projects" },
-    { path: "/contact", icon: <FaEnvelope />, label: "Contact" },
+    {
+      path: "/",
+      icon: <FaHome />,
+      label: "Home",
+    },
+    {
+      path: "/about",
+      icon: <FaUser />,
+      label: "About",
+    },
+    {
+      path: "/projects",
+      icon: <FaCode />,
+      label: "Projects",
+    },
+    {
+      path: "/contact",
+      icon: <FaEnvelope />,
+      label: "Contact",
+    },
   ];
 
   return (
-    <div
-      className="floating-nav-wrapper"
-      ref={wrapperRef}
-      onMouseLeave={!isMobile ? () => setOpen(false) : undefined}
-    >
+    <div className="floating-nav-wrapper" ref={wrapperRef}>
+      {/* ================= MOBILE ================= */}
 
-      {/* AP Floating Button */}
-      <motion.div
-        className="ap-tab"
-        onMouseEnter={!isMobile ? () => setOpen(true) : undefined}
-        onClick={isMobile ? () => setOpen(!open) : undefined}
-        whileTap={{ scale: 0.9 }}
-        animate={{ scale: open ? 1.05 : 1 }}
-      >
-       {isMobile ? <FaBars /> : "AP"}
-      </motion.div>
-
-      {/* Dropdown Menu */}
-      <AnimatePresence>
-        {open && (
+      {isMobile ? (
+        <>
           <motion.div
-            className="floating-nav-panel"
-            initial={{ opacity: 0, scale: 0.8, x: -20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            exit={{ opacity: 0, scale: 0.8, x: -20 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="ap-tab"
+            onClick={() => setOpen(!open)}
+            whileTap={{ scale: 0.9 }}
           >
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setOpen(false)}
-                className={`floating-nav-item ${
-                  location.pathname === item.path ? "active" : ""
-                }`}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </Link>
-            ))}
+            <FaBars />
           </motion.div>
-        )}
-      </AnimatePresence>
+
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className="floating-nav-panel"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              >
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className={`floating-nav-item ${
+                      location.pathname === item.path ? "active" : ""
+                    }`}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      ) : (
+        /* ================= DESKTOP ================= */
+
+        <motion.nav
+          className="desktop-nav"
+          initial={{ y: -80, opacity: 0 }}
+          animate={{
+            y: showNav ? 0 : -90,
+            opacity: showNav ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.35,
+            ease: "easeInOut",
+          }}
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`desktop-nav-item ${
+                location.pathname === item.path ? "active" : ""
+              }`}
+            >
+              {item.icon}
+
+              <span className="desktop-tooltip">
+                {item.label}
+              </span>
+            </Link>
+          ))}
+        </motion.nav>
+      )}
     </div>
   );
 };
