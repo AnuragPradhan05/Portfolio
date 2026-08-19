@@ -94,27 +94,41 @@ const Projects = () => {
       {/* ================= Projects ================= */}
       <h1 className="projects-title">My Projects</h1>
 
-      <div className="stack-projects">
-        {projects.map((p, i) => (
-          <motion.div
+      <div className="projects-grid">
+        {projects.map((p, i) => {
+          // Entrance logic: 0 = Left, 1 = Right, 2 = Bottom
+          const direction = i % 3;
+          let initialX = 0;
+          let initialY = 0;
+
+          if (direction === 0) initialX = -100;
+          else if (direction === 1) initialX = 100;
+          else if (direction === 2) initialY = 100;
+
+          return (
+            <motion.div
               key={i}
-              className="stack-card-wrapper"
-              style={{ top: `max(70px, calc(10vh + ${i * 20}px))` }}
-              initial={{ opacity: 0, y: 80, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ margin: "-100px", once: true }}
-          >
-          <ProjectCard
-            title={p.title}
-            description={p.desc}
-            tech={p.tech}
-            github={p.github}
-            live={p.live}
-            image={p.image}
-          />
-          </motion.div>
-        ))}
+              className="project-grid-item"
+              initial={{ opacity: 0, x: initialX, y: initialY }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1], // Premium snappy ease
+                delay: 0.1,
+              }}
+              viewport={{ margin: "-50px", once: true }}
+            >
+              <ProjectCard
+                title={p.title}
+                description={p.desc}
+                tech={p.tech}
+                github={p.github}
+                live={p.live}
+                image={p.image}
+              />
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* ================= Certificates ================= */}

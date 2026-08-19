@@ -6,8 +6,8 @@
 
 :root {
   --glass-bg: rgba(18, 18, 18, 0.68);
-  --glass-border: rgba(255, 140, 0, 0.18);
-  --glow: rgba(255, 140, 0, 0.18);
+  --glass-border: var(--border-glass);
+  --glow: var(--border-glass);
 }
 
 /* ---------- WRAPPER ---------- */
@@ -33,7 +33,7 @@
   -webkit-backdrop-filter: blur(14px);
 
   border: 1px solid var(--glass-border);
-  color: #fff;
+  color: var(--text-white);
 
   font-family: 'Audiowide', cursive;
   font-size: 1.15rem;
@@ -117,7 +117,7 @@
   padding: 8px 10px;
   border-radius: 10px;
 
-  color: #ddd;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -136,14 +136,14 @@
 /* Hover — soft, clean */
 .floating-nav-item:hover {
   background: rgba(255, 140, 0, 0.10);
-  color: #ffb266;
+  color: var(--orange-light);
   transform: translateX(3px);
 }
 
 /* ---------- ACTIVE ITEM ---------- */
 .floating-nav-item.active {
   background: rgba(255, 140, 0, 0.14);
-  color: #ffb266;
+  color: var(--orange-light);
 }
 
 /* Left accent indicator (professional touch) */
@@ -154,7 +154,7 @@
   width: 3px;
   height: 60%;
   border-radius: 3px;
-  background: #ff8c00;
+  background: var(--orange-start);
 }
 
 /* ===================================================== */
@@ -277,7 +277,7 @@
   align-items: center;
   justify-content: center;
 
-  color: #d8d8d8;
+  color: var(--text-secondary);
   text-decoration: none;
 
   border-radius: 14px;
@@ -291,13 +291,13 @@
 
 .desktop-nav-item:hover {
   background: rgba(255,140,0,.12);
-  color: #ff9f1c;
+  color: var(--orange-accent);
   transform: translateY(-2px) scale(1.08);
 }
 
 .desktop-nav-item.active {
   background: rgba(255,140,0,.16);
-  color: #ff9f1c;
+  color: var(--orange-accent);
 }
 
 /* Tooltip */
@@ -317,7 +317,7 @@
 
   font-size: .8rem;
 
-  color: white;
+  color: var(--text-white);
 
   background: rgba(20,20,20,.95);
   backdrop-filter: blur(10px);

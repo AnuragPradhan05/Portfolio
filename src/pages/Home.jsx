@@ -72,75 +72,60 @@ const Home = () => {
             I focus on blending design with logic to bring ideas to life.
           </motion.p>
 
-          {/* ---------- Social Icons ---------- */}
-          <motion.div 
-            className="social-icons"
+          {/* ---------- Buttons & Socials Container ---------- */}
+          <motion.div
+            className="home-actions"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8 }}
           >
-            <motion.a
-              href="https://github.com/AnuragPradhan05"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, boxShadow: "0 0 15px rgba(255,140,0,0.8)" }}
-            >
-              <FaGithub />
-            </motion.a>
+            {/* Primary Navigation Buttons */}
+            <div className="primary-actions">
+              <Link to="/projects" className="btn-modern primary">
+                <motion.span whileTap={{ scale: 0.95 }} style={{ display: "inline-block" }}>
+                  View My Work
+                </motion.span>
+              </Link>
+              
+              <Link to="/contact" className="btn-modern secondary">
+                <motion.span whileTap={{ scale: 0.95 }} style={{ display: "inline-block" }}>
+                  Let's Talk
+                </motion.span>
+              </Link>
+            </div>
 
-            <motion.a
-              href="http://www.linkedin.com/in/anurag-pradhan-5b398130a"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, boxShadow: "0 0 15px rgba(255,140,0,0.8)" }}
-            >
-              <FaLinkedin />
-            </motion.a>
-
-            <motion.a
-              href={resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, boxShadow: "0 0 15px rgba(255,140,0,0.8)" }}
-            >
-              <FaFileAlt />
-            </motion.a>
-          </motion.div>
-
-          {/* ---------- Buttons ---------- */}
-          <motion.div
-            className="home-buttons"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.9 }}
-          >
-            {/* ✅ Changed from <a> to <Link> */}
-            <Link to="/projects" className="btn">
-              <motion.span
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0 0 25px rgba(255,140,0,0.9)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                style={{ display: "inline-block" }}
+            {/* Social Links as Aesthetic Pills */}
+            <div className="social-actions">
+              <motion.a
+                href="https://github.com/AnuragPradhan05"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-pill"
+                whileHover={{ y: -3 }}
               >
-                View My Work
-              </motion.span>
-            </Link>
+                <FaGithub /> <span>GitHub</span>
+              </motion.a>
 
-            {/* ✅ Changed from <a> to <Link> */}
-            <Link to="/contact" className="btn-outline">
-              <motion.span
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0 0 25px rgba(255,140,0,0.7)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                style={{ display: "inline-block" }}
+              <motion.a
+                href="http://www.linkedin.com/in/anurag-pradhan-5b398130a"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-pill"
+                whileHover={{ y: -3 }}
               >
-                Contact Me
-              </motion.span>
-            </Link>
+                <FaLinkedin /> <span>LinkedIn</span>
+              </motion.a>
+
+              <motion.a
+                href={resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-pill"
+                whileHover={{ y: -3 }}
+              >
+                <FaFileAlt /> <span>Resume</span>
+              </motion.a>
+            </div>
           </motion.div>
         </motion.div>
       </div>

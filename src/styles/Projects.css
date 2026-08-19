@@ -4,7 +4,7 @@
 .projects-page {
   padding: clamp(50px, 6vw, 80px) clamp(16px, 6vw, 7%);
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-black) 100%);
   box-sizing: border-box;
 }
 
@@ -17,7 +17,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(90deg, #ff8c00, #ffa500, #ff4500);
+  background: linear-gradient(90deg, var(--orange-start), var(--orange-mid), var(--orange-end));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,7 +39,7 @@
   display: block;
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #ff8c00, #ff4500);
+  background: linear-gradient(90deg, var(--orange-start), var(--orange-end));
   margin: 12px auto 0 auto;
   border-radius: 2px;
   box-shadow: 0 0 10px rgba(255,140,0,0.5);
@@ -50,114 +50,22 @@
 }
 
 /* =========================================
-   STACKING PROJECTS
+   PROJECTS GRID (Replaced Stack)
 ========================================= */
 
-.stack-projects {
-  position: relative;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding-bottom: 20px;
-  margin-top: -20px; /* moves whole stack upward */
 }
 
-/* Each card section */
-.stack-card-wrapper {
-  position: sticky;
-  top: 6vh; /* moved upward from 10vh */
-  height: 88vh;
+.project-grid-item {
+  width: 100%;
   display: flex;
-  align-items: flex-start; /* start higher */
-  justify-content: center;
-  margin-bottom: 0;
-  padding-top: 10px;
-}
-
-/* Bigger premium card */
-.stack-card-wrapper .project-card {
-  width: min(100%, 980px);
-  height: 76vh;
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-/* Hover lift */
-.stack-card-wrapper .project-card:hover {
-  transform: translateY(-8px) scale(1.01);
-}
-
-/* Make image larger */
-.stack-card-wrapper .project-img {
-  height: 320px;
-  object-fit: cover;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 140, 0, 0.15);
-
-  box-shadow:
-    0 8px 25px rgba(0,0,0,0.45),
-    0 0 25px rgba(255,140,0,0.08);
-}
-
-/* =========================================
-   PREMIUM GLASS CARD EFFECT
-========================================= */
-
-.stack-card-wrapper .project-front,
-.stack-card-wrapper .project-back {
-  border-radius: 26px;
-  padding: 28px;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  /* brighter glass */
-  background:
-    linear-gradient(
-      145deg,
-      rgba(30, 30, 30, 0.88),
-      rgba(12, 12, 12, 0.82)
-    );
-
-  /* stronger border */
-  border: 1px solid rgba(255, 140, 0, 0.22);
-
-  /* MUCH better visibility */
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.75),
-    0 10px 25px rgba(255,140,0,0.08),
-    0 0 0 1px rgba(255,255,255,0.03),
-    inset 0 1px 0 rgba(255,255,255,0.05);
-
-  overflow: hidden;
-  position: relative;
-}
-
-/* subtle glow overlay */
-.stack-card-wrapper .project-front::before,
-.stack-card-wrapper .project-back::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(255,140,0,0.14),
-      transparent 40%
-    );
-
-  pointer-events: none;
-}
-
-/* stronger hover visibility */
-.stack-card-wrapper .project-front:hover,
-.stack-card-wrapper .project-back:hover {
-  border-color: rgba(255, 140, 0, 0.38);
-
-  box-shadow:
-    0 35px 75px rgba(0,0,0,0.82),
-    0 0 35px rgba(255,140,0,0.12),
-    0 0 0 1px rgba(255,140,0,0.18);
 }
 
 /* ================= Certificates Title ================= */
@@ -171,7 +79,7 @@
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: var(--text-white);
   text-transform: uppercase;
   text-align: center;
   padding: 0 10px;
@@ -180,8 +88,8 @@
 .cert-line {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #00eaff, transparent);
-  box-shadow: 0 0 8px rgba(0, 234, 255, 0.7);
+  background: linear-gradient(90deg, transparent, var(--orange-start), transparent);
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
   border-radius: 2px;
   flex-shrink: 0;
 }
@@ -195,48 +103,86 @@
 
 /* ================= Cert Card ================= */
 .cert-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: clamp(12px, 2vw, 16px);
-  backdrop-filter: blur(6px);
-  transition: 0.25s ease;
+  border-radius: 16px;
+  padding: clamp(14px, 2.5vw, 18px);
+  backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   text-align: center;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .cert-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.45);
+  transform: translateY(-5px);
+  border-color: rgba(255, 140, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(255, 140, 0, 0.15);
 }
 
 .cert-img {
   width: 100%;
-  height: clamp(140px, 22vw, 180px);
+  height: clamp(150px, 24vw, 190px);
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease;
+}
+
+.cert-card:hover .cert-img {
+  transform: scale(1.03);
 }
 
 .cert-card h3 {
-  color: #f9fafb;
-  font-size: clamp(0.9rem, 1.6vw, 1rem);
-  margin-bottom: 10px;
+  color: var(--text-white);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  margin-bottom: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  flex: 1; /* Pushes the button to the bottom */
 }
 
 .cert-btn {
-  background: linear-gradient(90deg, #ff8c00, #ff6a00);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--orange-start), var(--orange-end));
   border: none;
-  padding: 7px 14px;
-  border-radius: 6px;
-  color: white;
+  padding: 8px 18px;
+  border-radius: 10px;
+  color: var(--bg-black);
   cursor: pointer;
-  font-size: clamp(0.78rem, 1.4vw, 0.85rem);
-  transition: 0.2s;
+  transition: all 0.4s ease;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 1;
+  margin-top: auto;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--orange-mid), var(--orange-start));
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+
+.cert-btn:hover::before {
+  opacity: 1;
 }
 
 .cert-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
 }
 
 /* ================= Cert Modal ================= */
@@ -255,7 +201,7 @@
 
 .cert-popup-container {
   position: relative;
-  background: #0b0b0b;
+  background: var(--bg-main);
   border-radius: 12px;
   padding: clamp(8px, 2vw, 14px);
   width: min(92%, 560px);
@@ -290,7 +236,7 @@
 }
 
 .cert-close:hover {
-  background: #ff6a00;
+  background: var(--orange-mid);
   transform: rotate(90deg) scale(1.08);
 }
 

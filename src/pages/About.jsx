@@ -59,7 +59,7 @@ const techCategories = [
   {
     label: "Backend",
     icon: <FaServer />,
-    items: ["Spring Boot", "Java", "Python","Fast API", "REST APIs"],
+    items: ["Spring Boot", "Java", "Python", "Fast API"],
   },
   {
     label: "Database",
@@ -110,9 +110,9 @@ const services = [
 /* ─── Bio bullet points ─── */
 const bioBullets = [
   { icon: <FaLaptopCode />, text: "Build full-stack apps with React, Angular & Spring Boot" },
-  { icon: <FaBolt />,       text: "Obsessed with performance, clean code & responsive UI" },
-  { icon: <FaTools />,      text: "Fast learner who thrives on real-world challenges" },
-  { icon: <FaHandshake />,  text: "Passionate about turning ideas into impactful products" },
+  { icon: <FaBolt />, text: "Obsessed with performance, clean code & responsive UI" },
+  { icon: <FaTools />, text: "Fast learner who thrives on real-world challenges" },
+  { icon: <FaHandshake />, text: "Passionate about turning ideas into impactful products" },
 ];
 
 const About = () => {
@@ -237,7 +237,7 @@ const About = () => {
         </div>
       </section>
 
-      
+
       <ScrollIndicator />
     </motion.section>
   );
