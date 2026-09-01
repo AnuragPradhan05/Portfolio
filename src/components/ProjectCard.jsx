@@ -18,7 +18,13 @@ const ProjectCard = ({ title, description, tech, github, live, image }) => {
         <div className="project-front">
           {image && (
             <div className="project-img-wrapper">
-              <img src={image} alt={title} className="project-img" />
+              <img
+                src={image}
+                alt={`${title} project screenshot and preview`}
+                className="project-img"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           )}
 

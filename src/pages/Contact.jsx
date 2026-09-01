@@ -62,6 +62,51 @@ const Reveal = ({ children, delay = 0, direction = "up" }) => {
   );
 };
 
+import SEO from "../components/SEO";
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://anuragsite-five.vercel.app/contact#webpage",
+      "url": "https://anuragsite-five.vercel.app/contact",
+      "name": "Contact Anurag Pradhan",
+      "description": "Contact page for software development inquiries, project collaborations, and hiring Anurag Pradhan.",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Anurag Pradhan",
+        "email": "mailto:pradhananurag2005@gmail.com",
+        "telephone": "+91 82606 89967",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bhubaneswar",
+          "addressRegion": "Odisha",
+          "postalCode": "751024",
+          "addressCountry": "India"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://anuragsite-five.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://anuragsite-five.vercel.app/contact"
+        }
+      ]
+    }
+  ]
+};
+
 const Contact = () => {
 
   /* FORM REF */
@@ -121,6 +166,13 @@ const Contact = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
+      <SEO
+        title="Contact Anurag Pradhan | Full-Stack Web Developer"
+        description="Get in touch with Anurag Pradhan for web development, full-stack projects, software solutions, or REST API development opportunities."
+        path="/contact"
+        schema={contactSchema}
+      />
+
       <FloatingIcons />
 
       <div className="contact-container">
@@ -216,7 +268,7 @@ const Contact = () => {
               </span>
 
               <h2 className="form-right-title">
-                CONTACT ME
+                LET'S DISCUSS YOUR PROJECT
               </h2>
 
               <p className="form-right-desc">

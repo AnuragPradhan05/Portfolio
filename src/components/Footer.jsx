@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="footer-container">
       {/* Left Section */}
-      <motion.h2
+      <motion.p
         className="footer-title"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -15,7 +15,7 @@ const Footer = () => {
       >
         © {new Date().getFullYear()} | Designed & Built by{" "}
         <span className="footer-name">Anurag Pradhan</span>
-      </motion.h2>
+      </motion.p>
 
       {/* Right Section */}
       <motion.div

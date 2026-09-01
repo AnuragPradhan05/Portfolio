@@ -121,6 +121,7 @@
   to   { text-shadow: 0 0 35px rgba(255, 140, 0, 0.8); }
 }
 
+.home-content h2,
 .home-content h3 {
   font-size: 1.4rem;
   color: var(--orange-start);

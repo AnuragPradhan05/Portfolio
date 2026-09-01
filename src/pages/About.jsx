@@ -115,6 +115,44 @@ const bioBullets = [
   { icon: <FaHandshake />, text: "Passionate about turning ideas into impactful products" },
 ];
 
+import SEO from "../components/SEO";
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://anuragsite-five.vercel.app/about#webpage",
+      "url": "https://anuragsite-five.vercel.app/about",
+      "name": "About Anurag Pradhan - Full-Stack Developer",
+      "description": "Background, technical skills, services, and experience of Anurag Pradhan.",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Anurag Pradhan",
+        "jobTitle": "Full-Stack Software Developer",
+        "description": "Full-Stack Developer crafting clean, performant, and user-centred digital experiences using React, Angular, Spring Boot, and FastAPI."
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://anuragsite-five.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About",
+          "item": "https://anuragsite-five.vercel.app/about"
+        }
+      ]
+    }
+  ]
+};
+
 const About = () => {
   return (
     <motion.section
@@ -124,6 +162,14 @@ const About = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
+      <SEO
+        title="About Anurag Pradhan | Full-Stack Web Developer"
+        description="Learn more about Anurag Pradhan, a Full-Stack Developer proficient in React, Angular, Spring Boot, FastAPI, MySQL, PostgreSQL, and modern web application development."
+        path="/about"
+        ogType="profile"
+        schema={aboutSchema}
+      />
+
       <FloatingIcons />
 
       {/* ════════════════════════════════════════
@@ -168,7 +214,15 @@ const About = () => {
           <Reveal direction="left" delay={0.25}>
             <div className="bio-image-wrap">
               <div className="bio-image-glow" />
-              <img src={myPic} alt="Anurag Pradhan" className="bio-photo" />
+              <img
+                src={myPic}
+                alt="Anurag Pradhan - Full-Stack Web Developer Profile Photo"
+                className="bio-photo"
+                loading="eager"
+                decoding="async"
+                width="300"
+                height="350"
+              />
             </div>
           </Reveal>
         </div>

@@ -14,60 +14,127 @@ import ScrollIndicator from "../components/ScrollIndicator";
 import cert2 from "/src/assets/certificate/certificate1.jpg";
 import cert1 from "/src/assets/certificate/certificate2.jpg";
 
+import SEO from "../components/SEO";
+
+const projectsSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://anuragsite-five.vercel.app/projects#webpage",
+      "url": "https://anuragsite-five.vercel.app/projects",
+      "name": "Projects & Software Portfolio - Anurag Pradhan",
+      "description": "Featured software projects, full-stack web applications, REST APIs, and open-source contributions by Anurag Pradhan.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Bloomify",
+            "url": "https://bloomify-ashen.vercel.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Patient History Management API",
+            "url": "https://github.com/AnuragPradhan05/patient-history-management-api"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "JR Transport Management System",
+            "url": "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Snake Game",
+            "url": "https://github.com/AnuragPradhan05/Snake_game"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Python Mini Projects",
+            "url": "https://github.com/AnuragPradhan05/python_projects"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://anuragsite-five.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://anuragsite-five.vercel.app/projects"
+        }
+      ]
+    }
+  ]
+};
+
 const Projects = () => {
   const [activeCert, setActiveCert] = useState(null);
 
-    const projects = [
-      {
-        title: "Bloomify",
-        desc: "Where emotions bloom into petals. A beautiful platform to transform feelings into digital flowers.",
-        tech: ["React", "Firebase"],
-        github: "https://github.com/AnuragPradhan05/Bloomify",
-        live: "https://bloomify-ashen.vercel.app/",
-        image: bloomifyImg,
-      },
-      {
-        title: "Patient History Management API",
-        desc: "A secure RESTful API for managing patient records and medical history with CRUD operations, validation, and a scalable Fast API architecture.",
-        tech: ["Fast API", "Python", "SQLite", "REST API"],
-        github: "https://github.com/AnuragPradhan05/patient-history-management-api",
-        live: "",
-        image: patientHistoryImg,
-      },
-      {
-        title: "JR Transport",
-        desc: "Driver & Transport Management System with clean UI.",
-        tech: ["Angular", "Spring Boot"],
-        github: [
-          {
-            name: "Frontend (Angular)",
-            url: "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular",
-          },
-          {
-            name: "Backend (Spring Boot)",
-            url: "https://github.com/Motuitionapplication/JrTransportManagement-BackEnd-Spring",
-          },
-        ],
-        image: jrtransportImg,
-      },
-      {
-        title: "Snake Game",
-        desc: "Classic snake game built using Python pygame.",
-        tech: ["Python"],
-        github: "https://github.com/AnuragPradhan05/Snake_game",
-        live: "",
-        image: snakeImg,
-      },
-      {
-        title: "Python Mini Projects",
-        desc: "KBC, Tic Tac Toe, Rock Paper Scissor, Book Store, etc.",
-        tech: ["Python"],
-        github:
-          "https://github.com/AnuragPradhan05/python_projects/tree/main/projects",
-        live: "",
-        image: pythonImg,
-      },
-    ];
+  const projects = [
+    {
+      title: "Bloomify",
+      desc: "Where emotions bloom into petals. A beautiful platform to transform feelings into digital flowers.",
+      tech: ["React", "Firebase"],
+      github: "https://github.com/AnuragPradhan05/Bloomify",
+      live: "https://bloomify-ashen.vercel.app/",
+      image: bloomifyImg,
+    },
+    {
+      title: "Patient History Management API",
+      desc: "A secure RESTful API for managing patient records and medical history with CRUD operations, validation, and a scalable Fast API architecture.",
+      tech: ["Fast API", "Python", "SQLite", "REST API"],
+      github: "https://github.com/AnuragPradhan05/patient-history-management-api",
+      live: "",
+      image: patientHistoryImg,
+    },
+    {
+      title: "JR Transport",
+      desc: "Driver & Transport Management System with clean UI.",
+      tech: ["Angular", "Spring Boot"],
+      github: [
+        {
+          name: "Frontend (Angular)",
+          url: "https://github.com/Motuitionapplication/JrTransportManagement-Frontend-Angular",
+        },
+        {
+          name: "Backend (Spring Boot)",
+          url: "https://github.com/Motuitionapplication/JrTransportManagement-BackEnd-Spring",
+        },
+      ],
+      image: jrtransportImg,
+    },
+    {
+      title: "Snake Game",
+      desc: "Classic snake game built using Python pygame.",
+      tech: ["Python"],
+      github: "https://github.com/AnuragPradhan05/Snake_game",
+      live: "",
+      image: snakeImg,
+    },
+    {
+      title: "Python Mini Projects",
+      desc: "KBC, Tic Tac Toe, Rock Paper Scissor, Book Store, etc.",
+      tech: ["Python"],
+      github:
+        "https://github.com/AnuragPradhan05/python_projects/tree/main/projects",
+      live: "",
+      image: pythonImg,
+    },
+  ];
 
   const certificates = [
     {
@@ -80,7 +147,6 @@ const Projects = () => {
     },
   ];
 
-
   return (
     <motion.section
       className="projects-page"
@@ -89,6 +155,13 @@ const Projects = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
+      <SEO
+        title="Projects & Software Portfolio | Anurag Pradhan"
+        description="Explore full-stack projects, REST APIs, and software applications built by Anurag Pradhan using React, Fast API, Angular, Spring Boot, and Python."
+        path="/projects"
+        schema={projectsSchema}
+      />
+
       <FloatingIcons />
 
       {/* ================= Projects ================= */}
@@ -149,7 +222,13 @@ const Projects = () => {
             transition={{ duration: 0.45, delay: i * 0.12 }}
             viewport={{ once: true }}
           >
-            <img src={c.image} alt={c.title} className="cert-img" />
+            <img
+              src={c.image}
+              alt={`${c.title} Certificate`}
+              className="cert-img"
+              loading="lazy"
+              decoding="async"
+            />
             <h3>{c.title}</h3>
 
             <button
