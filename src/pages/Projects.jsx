@@ -32,7 +32,7 @@ const projectsSchema = {
             "@type": "ListItem",
             "position": 1,
             "name": "Bloomify",
-            "url": "https://bloomify-ashen.netlify.app/"
+            "url": "https://bloomify-ashen.netlify.app/" 
           },
           {
             "@type": "ListItem",
@@ -90,7 +90,7 @@ const Projects = () => {
       desc: "Where emotions bloom into petals. A beautiful platform to transform feelings into digital flowers.",
       tech: ["React", "Firebase"],
       github: "https://github.com/AnuragPradhan05/Bloomify",
-      live: "https://bloomify-ashen.vercel.app/",
+      live: "https://bloomify-ashen.netlify.app/",
       image: bloomifyImg,
     },
     {
