@@ -32,7 +32,7 @@ const projectsSchema = {
             "@type": "ListItem",
             "position": 1,
             "name": "Bloomify",
-            "url": "https://bloomify-ashen.vercel.app/"
+            "url": "https://bloomify-ashen.netlify.app/"
           },
           {
             "@type": "ListItem",
